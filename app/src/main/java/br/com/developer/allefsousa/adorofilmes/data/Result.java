@@ -3,6 +3,7 @@ package br.com.developer.allefsousa.adorofilmes.data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,13 +11,13 @@ import java.util.List;
  * Created by allef on 11/08/2018.
  */
 
-public class Result {
+public class Result implements Serializable {
     @SerializedName("poster_path")
     @Expose
     private String posterPath;
     @SerializedName("popularity")
     @Expose
-    private Integer popularity;
+    private String popularity;
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -28,7 +29,7 @@ public class Result {
     private String backdropPath;
     @SerializedName("vote_average")
     @Expose
-    private Integer voteAverage;
+    private String voteAverage;
     @SerializedName("media_type")
     @Expose
     private String mediaType;
@@ -47,13 +48,16 @@ public class Result {
     @SerializedName("vote_count")
     @Expose
     private Integer voteCount;
-    @SerializedName("name")
+
+    @SerializedName("title")
     @Expose
     private String name;
+
     @SerializedName("original_name")
     @Expose
     private String originalName;
     private final static long serialVersionUID = -161524790651428493L;
+
 
     /**
      * No args constructor for use in serialization
@@ -62,24 +66,7 @@ public class Result {
     public Result() {
     }
 
-    /**
-     *
-     * @param genreIds
-     * @param originalName
-     * @param originalLanguage
-     * @param backdropPath
-     * @param voteCount
-     * @param mediaType
-     * @param id
-     * @param originCountry
-     * @param overview
-     * @param name
-     * @param posterPath
-     * @param firstAirDate
-     * @param voteAverage
-     * @param popularity
-     */
-    public Result(String posterPath, Integer popularity, Integer id, String overview, String backdropPath, Integer voteAverage, String mediaType, String firstAirDate, List<String> originCountry, List<String> genreIds, String originalLanguage, Integer voteCount, String name, String originalName) {
+    public Result(String posterPath, String popularity, Integer id, String overview, String backdropPath, String voteAverage, String mediaType, String firstAirDate, List<String> originCountry, List<String> genreIds, String originalLanguage, Integer voteCount, String name, String originalName) {
         this.posterPath = posterPath;
         this.popularity = popularity;
         this.id = id;
@@ -94,6 +81,7 @@ public class Result {
         this.voteCount = voteCount;
         this.name = name;
         this.originalName = originalName;
+
     }
 
     public String getPosterPath() {
@@ -104,11 +92,11 @@ public class Result {
         this.posterPath = posterPath;
     }
 
-    public Integer getPopularity() {
+    public String getPopularity() {
         return popularity;
     }
 
-    public void setPopularity(Integer popularity) {
+    public void setPopularity(String popularity) {
         this.popularity = popularity;
     }
 
@@ -136,11 +124,11 @@ public class Result {
         this.backdropPath = backdropPath;
     }
 
-    public Integer getVoteAverage() {
+    public String getVoteAverage() {
         return voteAverage;
     }
 
-    public void setVoteAverage(Integer voteAverage) {
+    public void setVoteAverage(String voteAverage) {
         this.voteAverage = voteAverage;
     }
 
@@ -211,4 +199,6 @@ public class Result {
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
+
+
 }

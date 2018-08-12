@@ -3,6 +3,7 @@ package br.com.developer.allefsousa.adorofilmes.data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * Created by allef on 11/08/2018.
  */
 
-public class Request {
+public class Request implements Serializable {
     @SerializedName("page")
     @Expose
     private Integer page;

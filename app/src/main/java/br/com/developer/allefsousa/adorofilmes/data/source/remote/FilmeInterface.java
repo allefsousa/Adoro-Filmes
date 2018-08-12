@@ -1,6 +1,7 @@
 package br.com.developer.allefsousa.adorofilmes.data.source.remote;
 
 import br.com.developer.allefsousa.adorofilmes.data.Request;
+import br.com.developer.allefsousa.adorofilmes.data.Result;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -10,8 +11,9 @@ import retrofit2.http.Query;
  */
 
 public interface FilmeInterface {
+
     @GET("multi?")
-    Call<Request> RequestAll(@Query("api_key") String valueKey, @Query("query") String nomeFilme,@Query("language") String idioma);
+    Call<Request> RequestAll(@Query("api_key") String valueKey, @Query("query") String nomeFilme, @Query("language") String idioma);
 
 
 }
