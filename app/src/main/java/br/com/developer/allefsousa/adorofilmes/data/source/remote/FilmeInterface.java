@@ -12,8 +12,10 @@ import retrofit2.http.Query;
 
 public interface FilmeInterface {
 
-    @GET("multi?")
+    @GET("search/multi?")
     Call<Request> RequestAll(@Query("api_key") String valueKey, @Query("query") String nomeFilme, @Query("language") String idioma);
 
+    @GET("movie/popular?")
+    Call<Request> RequestPopular(@Query("api_key")String valueKey,@Query("language") String idioma);
 
 }

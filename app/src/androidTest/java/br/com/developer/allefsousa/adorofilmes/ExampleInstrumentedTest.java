@@ -7,6 +7,9 @@ import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.junit.Assert.*;
 
 /**
@@ -22,5 +25,11 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("br.com.developer.allefsousa.adorofilmes", appContext.getPackageName());
+    }
+    @Test
+    public void testeui(){
+        onView(withId(R.id.my_recycler_lancamentos))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(3, click()));
+
     }
 }

@@ -24,19 +24,29 @@ public interface PesquisaFilmeContract {
         void Limpar();
 
         void ErroResquest(Throwable t);
+
+
+        void updateUiTopFilmes(List<Result> results);
     }
     interface presenter{
 
         void PesquisaFilme(String tituloFilme);
+        void BuscaLancamentos();
     }
+
     interface getFilmeService {
 
         interface OnFinishedListener {
             void onFinished(Request request);
             void onFailure(Throwable t);
+
+            void onFinishedTop(Request request);
+            void onFailureTop(Throwable t);
         }
 
-        void getFilmeArrayList(OnFinishedListener onFinishedListener,String nomeFilme);
+        void getFilmeArrayList(OnFinishedListener onFinishedListener, String nomeFilme);
+
+        void getFilmeLancamento(OnFinishedListener onFinishedListener);
     }
 
 

@@ -11,9 +11,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
-
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -28,7 +25,7 @@ import br.com.developer.allefsousa.adorofilmes.data.Result;
  * Created by allef on 11/08/2018.
  */
 
-public class AdapterFilme extends RecyclerView.Adapter<AdapterFilme.ViewHolder> {
+public class AdapterFilmeLancamentos extends RecyclerView.Adapter<AdapterFilmeLancamentos.ViewHolder> {
     private Context context;
     private List<Result> filmeList = new ArrayList<>();
     private RecyclerItemClickListener recyclerItemClickListener;
@@ -36,7 +33,7 @@ public class AdapterFilme extends RecyclerView.Adapter<AdapterFilme.ViewHolder> 
     SimpleDateFormat dt1 = new SimpleDateFormat("dd-mm-yyyyy");
 
 
-    public AdapterFilme(Context context, List<Result> filmeList, RecyclerItemClickListener recyclerItemClickListener) {
+    public AdapterFilmeLancamentos(Context context, List<Result> filmeList, RecyclerItemClickListener recyclerItemClickListener) {
         this.context = context;
         this.filmeList = filmeList;
         this.recyclerItemClickListener = recyclerItemClickListener;
@@ -45,20 +42,14 @@ public class AdapterFilme extends RecyclerView.Adapter<AdapterFilme.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_filme, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_filme_lancamento, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         Result filme = filmeList.get(position);
-//            filmeList.remove(position);
-//            notifyItemRemoved(position);
-//            notifyItemRangeChanged(position, filmeList.size());
-
-            holder.updateUi(filme);
-
-
+        holder.updateUi(filme);
 
         holder.view.setOnClickListener(v ->
                 recyclerItemClickListener.onItemClick(filmeList.get(position)));
@@ -89,13 +80,7 @@ public class AdapterFilme extends RecyclerView.Adapter<AdapterFilme.ViewHolder> 
         }
 
         private void updateUi(Result filme) {
-
-            if (filme.getName() == null){
-                textNomeFilme.setText(filme.getOriginalName());
-            }else {
-                textNomeFilme.setText(filme.getName());
-            }
-
+            textNomeFilme.setText(filme.getName());
             textDataFilme.setText(filme.getFirstAirDate());
             if (filme.getPosterPath()== null) {
                 logoFilme.setImageDrawable (context.getResources().getDrawable(R.drawable.placeholder));
