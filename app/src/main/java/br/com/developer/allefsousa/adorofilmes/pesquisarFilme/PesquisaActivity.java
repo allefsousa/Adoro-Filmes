@@ -104,12 +104,14 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
 
     @Override
     public void nomeFilmeemBranco() {
-
+        editFilme.setError("This field is required");
+        Toast.makeText(this, "Login successfully.", Toast.LENGTH_SHORT).show();
     }
 
 
     @Override
     public void PesquisaFilmeSemretorno() {
+
 
     }
 

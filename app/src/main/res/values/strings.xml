@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Adoro Filmes</string>
+    <string name="item_element_text">This is element #</string>
+    <string name="sLancamentos">Lançamentos</string>
+    <string name="validation_message">Informe o nome do filme.</string>
+
 </resources>

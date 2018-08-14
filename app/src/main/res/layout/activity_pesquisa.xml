@@ -84,7 +84,7 @@
         android:orientation="vertical"
         android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/lancamentos"
+            android:id="@+id/tlancamentos"
             android:layout_width="match_parent"
             android:layout_marginTop="05dp"
             android:layout_height="match_parent"
@@ -92,7 +92,7 @@
             android:background="@drawable/gradient"
             android:textColor="@android:color/white"
             android:textSize="20sp"
-            android:text="Lançamentos " />
+            android:text="@string/sLancamentos" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/my_recycler_lancamentos"
