@@ -31,13 +31,12 @@ import butterknife.ButterKnife;
 
 import static br.com.developer.allefsousa.adorofilmes.utils.DpUtils.dpToPx;
 
-public class PesquisaActivity extends AppCompatActivity implements PesquisaFilmeContract.view,EditText.OnEditorActionListener {
+public class PesquisaActivity extends AppCompatActivity implements PesquisaFilmeContract.view {
 
     private final String apiKey = "745509647d8c3e2ac4c7b0d5ef2d7352";
     private PesquisaFilmeContract.presenter mPresenter;
     private AdapterFilme adapterFilme;
     private AdapterFilmeLancamentos adapterFilme2;
-    private EditText.OnEditorActionListener actionListener;
 
     @BindView(R.id.my_recycler_lancamentos)
     RecyclerView recyclerViewlancamentos;
@@ -79,14 +78,6 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
         mPresenter.BuscaLancamentos();
     }
 
-    @Override
-    public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-
-
-        return false;
-
-    }
-
 
     private void hideKeyboard(PesquisaActivity activity) {
 
@@ -112,6 +103,8 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
     @Override
     public void PesquisaFilmeSemretorno() {
 
+        Toast.makeText(this, "Não Existem resultados para sua Pesquisa !", Toast.LENGTH_SHORT).show();
+
 
     }
 
@@ -122,11 +115,6 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
         recyclerViewfilme.setNestedScrollingEnabled(false);
         recyclerViewfilme.addItemDecoration(new SpacingItemDecoration(2, dpToPx(this, 4), true));
         recyclerViewfilme.setAdapter(adapterFilme);
-
-    }
-
-    @Override
-    public void ColapsinExpanded(boolean b) {
 
     }
 

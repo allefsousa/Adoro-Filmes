@@ -19,12 +19,9 @@ public interface PesquisaFilmeContract {
 
         void RecyclerViewSetValue(List<Result> resultFilme);
 
-        void ColapsinExpanded(boolean b);
-
         void Limpar();
 
         void ErroResquest(Throwable t);
-
 
         void updateUiTopFilmes(List<Result> results);
     }
