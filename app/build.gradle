@@ -16,7 +16,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -55,5 +55,5 @@ dependencies {
     testCompile 'org.mockito:mockito-core:2.7.22'
     // required if you want to use Mockito for Android tests
     androidTestCompile 'org.mockito:mockito-android:2.7.22'
-    testImplementation "org.robolectric:robolectric:3.8"
+    implementation "com.andkulikov:transitionseverywhere:1.8.0"
 }

@@ -98,10 +98,10 @@ public class AdapterFilme extends RecyclerView.Adapter<AdapterFilme.ViewHolder> 
 
             textDataFilme.setText(filme.getFirstAirDate());
             if (filme.getPosterPath()== null) {
-                logoFilme.setImageDrawable (context.getResources().getDrawable(R.drawable.placeholder));
+                logoFilme.setImageDrawable (context.getResources().getDrawable(R.drawable.placehol));
             } else {
                 RequestOptions options = new RequestOptions()
-                        .placeholder(R.drawable.placeholder)
+                        .placeholder(R.drawable.placehol)
                         .priority(Priority.HIGH);
 
                 Glide.with(context)

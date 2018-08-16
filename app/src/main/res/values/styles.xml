@@ -38,7 +38,7 @@
 
     <style name="SplashTheme" parent="MyTheme">
 
-        <!--<item name="android:windowBackground">@drawable/layerlist</item>-->
+        <item name="android:windowBackground">@drawable/layer_list</item>
     </style>
 
 </resources>

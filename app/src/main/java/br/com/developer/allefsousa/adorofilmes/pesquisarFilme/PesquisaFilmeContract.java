@@ -24,6 +24,7 @@ public interface PesquisaFilmeContract {
         void ErroResquest(Throwable t);
 
         void updateUiTopFilmes(List<Result> results);
+        void visibilidadeTexto();
     }
     interface presenter{
 

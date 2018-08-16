@@ -83,10 +83,10 @@ public class AdapterFilmeLancamentos extends RecyclerView.Adapter<AdapterFilmeLa
             textNomeFilme.setText(filme.getName());
             textDataFilme.setText(filme.getFirstAirDate());
             if (filme.getPosterPath()== null) {
-                logoFilme.setImageDrawable (context.getResources().getDrawable(R.drawable.placeholder));
+                logoFilme.setImageDrawable (context.getResources().getDrawable(R.drawable.placehol));
             } else {
                 RequestOptions options = new RequestOptions()
-                        .placeholder(R.drawable.placeholder)
+                        .placeholder(R.drawable.placehol)
                         .priority(Priority.HIGH);
 
                 Glide.with(context)

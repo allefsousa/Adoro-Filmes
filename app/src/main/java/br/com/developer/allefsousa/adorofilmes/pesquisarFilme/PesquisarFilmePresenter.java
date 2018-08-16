@@ -8,9 +8,7 @@ import java.util.List;
 import br.com.developer.allefsousa.adorofilmes.data.Request;
 import br.com.developer.allefsousa.adorofilmes.data.Result;
 
-/**
- * Created by allef on 11/08/2018.
- */
+
 
 public class PesquisarFilmePresenter implements PesquisaFilmeContract.presenter, PesquisaFilmeContract.getFilmeService.OnFinishedListener {
 
@@ -41,8 +39,8 @@ public class PesquisarFilmePresenter implements PesquisaFilmeContract.presenter,
         if (request.getResults() == null) {
             myView.PesquisaFilmeSemretorno();
         } else {
+            myView.visibilidadeTexto();
             myView.RecyclerViewSetValue(request.getResults());
-            myView.ColapsinExpanded(false);
             myView.Limpar();
         }
     }

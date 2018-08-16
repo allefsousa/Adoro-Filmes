@@ -86,7 +86,7 @@
         <TextView
             android:id="@+id/tlancamentos"
             android:layout_width="match_parent"
-            android:layout_marginTop="05dp"
+            android:layout_margin="05dp"
             android:layout_height="match_parent"
             android:paddingLeft="8dp"
             android:background="@drawable/gradient"
@@ -105,13 +105,13 @@
             android:id="@+id/tPesquisa"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="05dp"
+            android:layout_margin="05dp"
             android:paddingLeft="8dp"
             android:visibility="invisible"
             android:background="@drawable/gradient"
             android:textColor="@android:color/white"
             android:textSize="20sp"
-            android:text="Busca" />
+            android:text="Pesquisa" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/my_recycler_view"

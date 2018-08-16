@@ -13,7 +13,7 @@ import retrofit2.Response;
  * Created by allef on 06/08/2018.
  */
 
-public class getFilmeServiceImpl implements PesquisaFilmeContract.getFilmeService {
+public class FilmeServiceImpl implements PesquisaFilmeContract.getFilmeService {
     private final String apiKey = "745509647d8c3e2ac4c7b0d5ef2d7352";
     private final String tipoFilme = "pt-br";
 
