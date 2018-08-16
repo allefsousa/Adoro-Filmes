@@ -1,4 +1,4 @@
-package br.com.developer.allefsousa.adorofilmes;
+package br.com.developer.allefsousa.adorofilmes.telaInicial;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import br.com.developer.allefsousa.adorofilmes.R;
 import br.com.developer.allefsousa.adorofilmes.pesquisarFilme.PesquisaActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
