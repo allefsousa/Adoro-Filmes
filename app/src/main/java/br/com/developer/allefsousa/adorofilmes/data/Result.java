@@ -20,7 +20,7 @@ public class Result implements Serializable {
     private String popularity;
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private String id;
     @SerializedName("overview")
     @Expose
     private String overview;
@@ -66,7 +66,7 @@ public class Result implements Serializable {
     public Result() {
     }
 
-    public Result(String posterPath, String popularity, Integer id, String overview, String backdropPath, String voteAverage, String mediaType, String firstAirDate, List<String> originCountry, List<String> genreIds, String originalLanguage, Integer voteCount, String name, String originalName) {
+    public Result(String posterPath, String popularity, String id, String overview, String backdropPath, String voteAverage, String mediaType, String firstAirDate, List<String> originCountry, List<String> genreIds, String originalLanguage, Integer voteCount, String name, String originalName) {
         this.posterPath = posterPath;
         this.popularity = popularity;
         this.id = id;
@@ -100,11 +100,11 @@ public class Result implements Serializable {
         this.popularity = popularity;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

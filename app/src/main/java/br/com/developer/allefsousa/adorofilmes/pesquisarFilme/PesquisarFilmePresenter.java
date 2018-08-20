@@ -3,19 +3,15 @@ package br.com.developer.allefsousa.adorofilmes.pesquisarFilme;
 import android.text.TextUtils;
 import android.util.Log;
 
-import java.util.List;
-
 import br.com.developer.allefsousa.adorofilmes.data.Request;
-import br.com.developer.allefsousa.adorofilmes.data.Result;
 
 
-
-public class PesquisarFilmePresenter implements PesquisaFilmeContract.presenter, PesquisaFilmeContract.getFilmeService.OnFinishedListener {
+public class PesquisarFilmePresenter implements PesquisaFilmeContract.presenter, PesquisaFilmeContract.filmeService.OnFinishedListener {
 
     private PesquisaFilmeContract.view myView;
-    private PesquisaFilmeContract.getFilmeService filmeService;
+    private PesquisaFilmeContract.filmeService filmeService;
 
-    public PesquisarFilmePresenter(PesquisaFilmeContract.view myView, PesquisaFilmeContract.getFilmeService filmeService) {
+    public PesquisarFilmePresenter(PesquisaFilmeContract.view myView, PesquisaFilmeContract.filmeService filmeService) {
         this.myView = myView;
         this.filmeService = filmeService;
     }

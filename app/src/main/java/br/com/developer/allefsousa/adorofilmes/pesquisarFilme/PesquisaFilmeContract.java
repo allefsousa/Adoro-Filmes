@@ -32,7 +32,7 @@ public interface PesquisaFilmeContract {
         void BuscaLancamentos();
     }
 
-    interface getFilmeService {
+    interface filmeService {
 
         interface OnFinishedListener {
             void onFinished(Request request);
