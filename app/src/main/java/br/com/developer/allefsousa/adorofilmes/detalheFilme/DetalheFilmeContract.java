@@ -1,14 +1,14 @@
 package br.com.developer.allefsousa.adorofilmes.detalheFilme;
 
-import br.com.developer.allefsousa.adorofilmes.data.Request;
-import br.com.developer.allefsousa.adorofilmes.pesquisarFilme.PesquisaFilmeContract;
+import br.com.developer.allefsousa.adorofilmes.data.FilmeDetalhes;
+import br.com.developer.allefsousa.adorofilmes.data.TvDetalhes;
 
 /**
  * Created by allef on 15/08/2018.
  */
 
 public interface DetalheFilmeContract {
-    interface view{
+    interface view {
         void recuperaDetalhe(String idFilme);
 
         void idFilmeNulla();
@@ -19,19 +19,30 @@ public interface DetalheFilmeContract {
 
         void falhaRequest(Throwable t);
     }
-    interface  presenter{
+
+    interface presenter {
 
         void recuperaDetalhes(String idFilme);
     }
 
-    interface detalherService{
-
-        interface OnFinishedListener {
-            void onFinishedRequest(Request request);
-            void onFailureRequest(Throwable t);
-        }
+    interface detalherService {
 
         void getFilmeArrayList(DetalheFilmePresenter onFinishedListener, String idFilme);
+
+        void getTvArrayList(DetalheFilmePresenter onFinishedListener, String idSerie);
+
+
+        interface OnFinishedListenerFilme {
+            void onFinishedRequestFilme(FilmeDetalhes filmeDetalhes);
+
+            void onFailureRequestFilme(Throwable t);
+        }
+
+        interface OnFinishedListenerTv {
+            void onFinishedRequestTv(TvDetalhes tvDetalhes);
+
+            void onFailureRequestTv(Throwable t);
+        }
 
 
     }
