@@ -25,7 +25,7 @@ public interface FilmeInterface {
     Call<FilmeDetalhes> detalhesFilme(@Path("filmeid") String idFilme, @Query("api_key")String valueKey, @Query("language") String idioma);
 
     @GET("tv/{serieId}?")
-    Call<TvDetalhes> detalhesTv(@Path("serieId") String idFilme, @Query("api_key")String valueKey, @Query("language") String idioma);
+    Call<TvDetalhes> detalhesTv(@Path("serieId") String idSerie, @Query("api_key")String valueKey, @Query("language") String idioma);
 
 
 }
