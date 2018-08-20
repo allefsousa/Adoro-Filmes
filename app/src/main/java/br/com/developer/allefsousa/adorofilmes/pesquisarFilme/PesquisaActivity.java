@@ -71,15 +71,10 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
         });
 
         buscaTopFilmes();
-        recyclerItemClickListener = new RecyclerItemClickListener() {
-            @Override
-            public void onItemClick(Result filme) {
-                Intent inten = new Intent(PesquisaActivity.this, DetalheFilmeActivity.class);
-                inten.putExtra("id",filme.getId());
-                startActivity(inten);
-
-               Toast.makeText(PesquisaActivity.this, "Olha Nois papai", Toast.LENGTH_SHORT).show();
-            }
+        recyclerItemClickListener = filme -> {
+            Intent inten = new Intent(PesquisaActivity.this, DetalheFilmeActivity.class);
+            inten.putExtra("id",filme.getId());
+            startActivity(inten);
         };
 
 

@@ -33,16 +33,28 @@ public class DetalheFilmePresenter implements DetalheFilmeContract.presenter,Det
     @Override
     public void onFinishedRequestFilme(FilmeDetalhes filmeDetalhes) {
 
+        if (filmeDetalhes != null){
+            mView.atualizaUi(filmeDetalhes);
+        }else {
+            mView.AtualizarUiNull();
+        }
+
     }
 
     @Override
     public void onFailureRequestFilme(Throwable t) {
 
+        mView.erroAoBuscarDetalhes();
+
     }
 
     @Override
     public void onFinishedRequestTv(TvDetalhes tvDetalhes) {
-
+        if (tvDetalhes != null){
+            mView.atualizaUiTv(tvDetalhes);
+        }else {
+            mView.AtualizarUiNull();
+        }
     }
 
     @Override

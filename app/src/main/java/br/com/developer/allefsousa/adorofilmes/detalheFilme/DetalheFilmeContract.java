@@ -18,6 +18,14 @@ public interface DetalheFilmeContract {
         void exibeDados();
 
         void falhaRequest(Throwable t);
+
+        void AtualizarUiNull();
+
+        void atualizaUi(FilmeDetalhes filmeDetalhes);
+
+        void atualizaUiTv(TvDetalhes tvDetalhes);
+
+        void erroAoBuscarDetalhes();
     }
 
     interface presenter {
