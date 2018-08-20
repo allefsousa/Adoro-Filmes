@@ -73,7 +73,7 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
         buscaTopFilmes();
         recyclerItemClickListener = filme -> {
             Intent inten = new Intent(PesquisaActivity.this, DetalheFilmeActivity.class);
-            inten.putExtra("id",filme.getId());
+            inten.putExtra("filme",filme);
             startActivity(inten);
         };
 

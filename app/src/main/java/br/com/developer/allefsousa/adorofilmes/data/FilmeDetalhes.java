@@ -33,7 +33,7 @@ public class FilmeDetalhes implements Serializable
     private String homepage;
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private String id;
     @SerializedName("imdb_id")
     @Expose
     private String imdbId;
@@ -84,7 +84,7 @@ public class FilmeDetalhes implements Serializable
     public FilmeDetalhes() {
     }
 
-    public FilmeDetalhes(Boolean adult, String backdropPath, DescricaoFilme belongsToCollection, Integer budget, List<GeneroFilme> genres, String homepage, Integer id, String imdbId, String originalLanguage, String originalTitle, String overview, Double popularity, String posterPath, String releaseDate, Integer revenue, Integer runtime, String status, String tagline, String title, Boolean video, Double voteAverage, Integer voteCount) {
+    public FilmeDetalhes(Boolean adult, String backdropPath, DescricaoFilme belongsToCollection, Integer budget, List<GeneroFilme> genres, String homepage, String id, String imdbId, String originalLanguage, String originalTitle, String overview, Double popularity, String posterPath, String releaseDate, Integer revenue, Integer runtime, String status, String tagline, String title, Boolean video, Double voteAverage, Integer voteCount) {
         this.adult = adult;
         this.backdropPath = backdropPath;
         this.belongsToCollection = belongsToCollection;
@@ -143,11 +143,11 @@ public class FilmeDetalhes implements Serializable
         this.homepage = homepage;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
