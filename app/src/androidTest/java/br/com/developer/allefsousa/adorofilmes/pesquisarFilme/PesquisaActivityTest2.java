@@ -83,8 +83,9 @@ public class PesquisaActivityTest2 {
 
 
         // matcher que compara com uma mensagem de toast
-//
-
+        onView(withText("Login successfully."))
+                .inRoot(withDecorView(not(activityRule.getActivity().getWindow().getDecorView())))
+                .check(matches(isDisplayed()));
     }
 
     public static Matcher withErrorEditext(final String expected) {
