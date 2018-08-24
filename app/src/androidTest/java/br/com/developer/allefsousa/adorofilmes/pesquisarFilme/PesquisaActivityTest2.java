@@ -73,8 +73,8 @@ public class PesquisaActivityTest2 {
         onView(withId(R.id.et_search))
                 .perform(pressImeActionButton());
         Thread.sleep(5000);
-        onView(withId(R.id.my_recycler_lancamentos))
-                .perform(RecyclerViewActions.actionOnItemAtPosition(5, click()));
+        onView(withId(R.id.my_recycler_view))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
 
     }
 
