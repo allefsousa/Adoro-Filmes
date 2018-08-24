@@ -9,7 +9,8 @@ import br.com.developer.allefsousa.adorofilmes.data.TvDetalhes;
 
 public interface DetalheFilmeContract {
     interface view {
-        void recuperaDetalhe(String idFilme);
+
+        void recuperaDetalhe(String id, String mediaType);
 
         void idFilmeNulla();
 
@@ -30,12 +31,12 @@ public interface DetalheFilmeContract {
 
     interface presenter {
 
-        void recuperaDetalhes(String idFilme);
+        void recuperaDetalhes(String idFilme, String mediaType);
     }
 
     interface detalherService {
 
-        void getFilmeArrayList(DetalheFilmePresenter onFinishedListener, String idFilme);
+        void getFilmeArrayList(DetalheFilmePresenter onFinishedListener, String idFilme, String mediaType);
 
         void getTvArrayList(DetalheFilmePresenter onFinishedListener, String idSerie);
 

@@ -41,9 +41,14 @@
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>
-    <android.support.constraint.ConstraintLayout
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_height="match_parent">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
@@ -54,7 +59,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="Nome:"
-            android:textSize="19sp"
+            android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@+id/textView2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -67,7 +72,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="text"
-            android:textSize="19sp"
+            android:textSize="15sp"
             app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,7 +83,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="Data Lançamento :"
-            android:textSize="19sp"
+            android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tNome" />
 
@@ -89,7 +94,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="text"
-            android:textSize="19sp"
+            android:textSize="15sp"
             app:layout_constraintStart_toEndOf="@+id/textView2"
             app:layout_constraintTop_toBottomOf="@+id/tNome" />
 
@@ -101,8 +106,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/gradient"
+            android:textColor="@android:color/white"
             android:text="Sinopse"
-            android:textSize="19sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -113,6 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="12dp"
+            android:padding="8dp"
             android:text="boa"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.023"
@@ -120,4 +127,5 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

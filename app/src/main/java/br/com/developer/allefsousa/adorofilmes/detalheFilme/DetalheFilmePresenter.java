@@ -3,7 +3,6 @@ package br.com.developer.allefsousa.adorofilmes.detalheFilme;
 import android.text.TextUtils;
 
 import br.com.developer.allefsousa.adorofilmes.data.FilmeDetalhes;
-import br.com.developer.allefsousa.adorofilmes.data.Request;
 import br.com.developer.allefsousa.adorofilmes.data.TvDetalhes;
 
 /**
@@ -15,17 +14,18 @@ public class DetalheFilmePresenter implements DetalheFilmeContract.presenter,Det
     private DetalheFilmeContract.view mView;
     private DetalheFilmeContract.detalherService detalherService;
 
+
     public DetalheFilmePresenter(DetalheFilmeContract.view mView, DetalheFilmeContract.detalherService detalherService) {
         this.mView = mView;
         this.detalherService = detalherService;
     }
 
     @Override
-    public void recuperaDetalhes(String idFilme) {
+    public void recuperaDetalhes(String idFilme, String mediaType) {
         if (TextUtils.isEmpty(idFilme)){
             mView.idFilmeNulla();
         }else {
-            detalherService.getFilmeArrayList(this,idFilme);
+            detalherService.getFilmeArrayList(this,idFilme,mediaType);
         }
     }
 

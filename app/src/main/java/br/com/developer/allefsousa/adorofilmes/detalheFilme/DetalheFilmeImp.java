@@ -1,7 +1,6 @@
 package br.com.developer.allefsousa.adorofilmes.detalheFilme;
 
 import br.com.developer.allefsousa.adorofilmes.data.FilmeDetalhes;
-import br.com.developer.allefsousa.adorofilmes.data.Request;
 import br.com.developer.allefsousa.adorofilmes.data.TvDetalhes;
 import br.com.developer.allefsousa.adorofilmes.data.source.remote.FilmeInterface;
 import br.com.developer.allefsousa.adorofilmes.data.source.remote.RetrofitInstance;
@@ -20,23 +19,25 @@ public class DetalheFilmeImp implements DetalheFilmeContract.detalherService {
     FilmeInterface filmeInterface = RetrofitInstance.getRetrofitInstance().create(FilmeInterface.class);
 
     @Override
-    public void getFilmeArrayList(DetalheFilmePresenter onFinishedListener, String idFilme) {
+    public void getFilmeArrayList(DetalheFilmePresenter onFinishedListener, String idFilme, String mediaType) {
 
+        if (mediaType.equals("tv")){
 
-        Call<FilmeDetalhes> call = filmeInterface.detalhesFilme(idFilme,apiKey, idioma);
-        call.enqueue(new Callback<FilmeDetalhes>() {
-            @Override
-            public void onResponse(Call<FilmeDetalhes> call, Response<FilmeDetalhes> response) {
-                onFinishedListener.onFinishedRequestFilme(response.body());
-            }
+        }else {
+            Call<FilmeDetalhes> call = filmeInterface.detalhesFilme(idFilme,apiKey, idioma);
+            call.enqueue(new Callback<FilmeDetalhes>() {
+                @Override
+                public void onResponse(Call<FilmeDetalhes> call, Response<FilmeDetalhes> response) {
+                    onFinishedListener.onFinishedRequestFilme(response.body());
+                }
 
-            @Override
-            public void onFailure(Call<FilmeDetalhes> call, Throwable t) {
-                onFinishedListener.onFailureRequestFilme(t);
+                @Override
+                public void onFailure(Call<FilmeDetalhes> call, Throwable t) {
+                    onFinishedListener.onFailureRequestFilme(t);
 
-            }
-        });
-
+                }
+            });
+        }
 
     }
 

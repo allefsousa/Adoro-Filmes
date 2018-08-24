@@ -44,24 +44,30 @@ public class DetalheFilmeActivity extends AppCompatActivity implements DetalheFi
         mPresenter = new DetalheFilmePresenter(this, new DetalheFilmeImp());
         initToolbar();
         filmeDetalhes = (Result) getIntent().getSerializableExtra("filme");
-        recuperaDetalhe(filmeDetalhes.getId());
+        recuperaDetalhe(filmeDetalhes.getId(), filmeDetalhes.getMediaType());
+    }
+
+    /**
+     * Meotdo responsavel por passar a id do filme ou serie a ser buscado e se oseu media type
+     * é um movie ou tv para que seja exibido o detalhe corretamente
+     *
+     * @param id
+     * @param mediaType
+     */
+    @Override
+    public void recuperaDetalhe(String id, String mediaType) {
+        mPresenter.recuperaDetalhes(id, mediaType);
     }
 
 
     private void initToolbar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Detalhes");
 
 
     }
 
-    @Override
-    public void recuperaDetalhe(String idFilme) {
-        mPresenter.recuperaDetalhes(idFilme);
-
-    }
 
     @Override
     public void idFilmeNulla() {
@@ -91,6 +97,8 @@ public class DetalheFilmeActivity extends AppCompatActivity implements DetalheFi
     @Override
     public void atualizaUi(FilmeDetalhes filme) {
         tNomeDetalhe.setText(filme.getTitle());
+        sinopse.setText(filme.getOverview());
+        tlancamento.setText(filme.getReleaseDate());
 
         RequestOptions options = new RequestOptions()
                 .placeholder(R.drawable.placehol)
