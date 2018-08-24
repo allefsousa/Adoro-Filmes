@@ -25,6 +25,9 @@ jobs:
           name: Download Constraint-layout-solver Dependencies
           command: echo y | sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout-solver;1.0.0-beta4"
 
+      - run:
+          name: chmod permissions
+          command: chmod +x ./gradlew
 
       - run:
           name: Download Dependencies
