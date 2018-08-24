@@ -1,0 +1,1 @@
+# Adoro Filmes [![CircleCI](https://circleci.com/gh/allefsousa/Adoro-Filmes/tree/master.svg?style=svg&circle-token=f1358bf53675cedb14455531f3085e2b9a3d926b)](https://circleci.com/gh/allefsousa/Adoro-Filmes)
