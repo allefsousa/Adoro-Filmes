@@ -9,6 +9,7 @@ import android.widget.EditText;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,26 +46,10 @@ public class PesquisaActivityTest2 {
     /**
      * matcher responsavel por pegar a mensagem de erro exibida pelo editText
      *
-     * @param expected
+     * @param
      * @return
      */
-    private static Matcher withErrorEditext(final String expected) {
-        return new TypeSafeMatcher() {
-            @Override
-            protected boolean matchesSafely(Object item) {
-                if (item instanceof EditText) {
-                    return ((EditText) item).getError().toString().equals(expected);
-                }
-                return false;
 
-            }
-
-            @Override
-            public void describeTo(Description description) {
-                description.appendText("Not found error message [" + expected + "]");
-            }
-        };
-    }
 
     @Test
     public void Pesquisafilme() throws InterruptedException {
@@ -94,12 +79,30 @@ public class PesquisaActivityTest2 {
         onView(withId(R.id.et_search))
                 .perform(pressImeActionButton());
         // matcher que verifica o texto do campo
-        onView(withId(R.id.et_search)).check(matches(withErrorEditext("This field is required")));
+//        onView(withId(R.id.et_search)).check(matches(withErrorEditext("This field is required")));
 
 
         // matcher que compara com uma mensagem de toast
         onView(withText("Login successfully."))
                 .inRoot(withDecorView(not(activityRule.getActivity().getWindow().getDecorView())))
                 .check(matches(isDisplayed()));
+    }
+
+    public static Matcher withErrorEditext(final String expected) {
+        return new TypeSafeMatcher() {
+            @Override
+            protected boolean matchesSafely(Object item) {
+                if (item instanceof EditText) {
+                    return ((EditText) item).getError().toString().equals(expected);
+                }
+                return false;
+
+            }
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("Not found error message [" + expected + "]");
+            }
+        };
     }
 }
