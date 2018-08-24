@@ -29,6 +29,11 @@ android {
             includeAndroidResources = true
         }
     }
+    android {
+        lintOptions {
+            abortOnError false
+        }
+    }
 }
 
 dependencies {
