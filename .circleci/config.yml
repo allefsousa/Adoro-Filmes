@@ -42,6 +42,10 @@ jobs:
           name: Run Tests
           command: ./gradlew lint test
 
+          - run:
+          name: Run TestsUi
+          command: ./gradlew lint androidTest
+
       - store_artifacts:
           path: app/build/reports
           destination: reports

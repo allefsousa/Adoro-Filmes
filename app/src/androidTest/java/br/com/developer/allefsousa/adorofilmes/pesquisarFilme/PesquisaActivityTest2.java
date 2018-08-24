@@ -25,20 +25,46 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
+import static org.junit.Assert.*;
 
+/**
+ * Created by allef on 24/08/2018.
+ */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class PesquisaActivityTest {
+public class PesquisaActivityTest2 {
+
 
     // mocando o contexto para utilizar a string do resources
-
 
 
     @Rule
     public ActivityTestRule<PesquisaActivity> activityRule = new ActivityTestRule<>(PesquisaActivity.class);
 
+    /**
+     * matcher responsavel por pegar a mensagem de erro exibida pelo editText
+     *
+     * @param expected
+     * @return
+     */
+    private static Matcher withErrorEditext(final String expected) {
+        return new TypeSafeMatcher() {
+            @Override
+            protected boolean matchesSafely(Object item) {
+                if (item instanceof EditText) {
+                    return ((EditText) item).getError().toString().equals(expected);
+                }
+                return false;
+
+            }
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("Not found error message [" + expected + "]");
+            }
+        };
+    }
 
     @Test
     public void Pesquisafilme() throws InterruptedException {
@@ -51,8 +77,9 @@ public class PesquisaActivityTest {
                 .perform(RecyclerViewActions.actionOnItemAtPosition(5, click()));
 
     }
+
     @Test
-    public void verificaVisibilidadeElementos(){
+    public void verificaVisibilidadeElementos() {
         onView(withId(R.id.my_recycler_lancamentos)).check(matches(isEnabled()));
         onView(withId(R.id.my_recycler_view)).check(matches(isEnabled()));
         onView(withId(R.id.tPesquisa)).check(matches(not(isDisplayed())));
@@ -61,7 +88,7 @@ public class PesquisaActivityTest {
     }
 
     @Test
-    public void clickButtonSearch(){
+    public void clickButtonSearch() {
         PesquisaActivity activity = activityRule.getActivity();
         onView(withId(R.id.et_search)).perform(typeText(""));
         onView(withId(R.id.et_search))
@@ -75,32 +102,4 @@ public class PesquisaActivityTest {
                 .inRoot(withDecorView(not(activityRule.getActivity().getWindow().getDecorView())))
                 .check(matches(isDisplayed()));
     }
-
-    /**
-     * matcher responsavel por pegar a mensagem de erro exibida pelo editText
-     * @param expected
-     * @return
-     */
-    private static Matcher withErrorEditext(final String expected) {
-        return new TypeSafeMatcher() {
-            @Override
-            protected boolean matchesSafely(Object item) {
-                if (item instanceof EditText) {
-                    return ((EditText)item).getError().toString().equals(expected);
-                }
-                return false;
-
-            }
-            @Override
-            public void describeTo(Description description) {
-                description.appendText("Not found error message [" + expected + "]");
-            }
-        };
-    }
-
-
-
-
-
-
 }
