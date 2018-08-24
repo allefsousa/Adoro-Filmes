@@ -42,7 +42,7 @@ jobs:
           name: Run Tests
           command: ./gradlew lint test
 
-          - run:
+      - run:
           name: Run TestsUi
           command: ./gradlew lint androidTest
 
