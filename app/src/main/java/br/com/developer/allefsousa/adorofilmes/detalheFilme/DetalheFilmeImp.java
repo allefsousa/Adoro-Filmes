@@ -21,8 +21,35 @@ public class DetalheFilmeImp implements DetalheFilmeContract.detalherService {
     @Override
     public void getFilmeArrayList(DetalheFilmePresenter onFinishedListener, String idFilme, String mediaType) {
 
-        if (mediaType.equals("tv")){
 
+        if (mediaType == null){
+            Call<FilmeDetalhes> call = filmeInterface.detalhesFilme(idFilme,apiKey, idioma);
+            call.enqueue(new Callback<FilmeDetalhes>() {
+                @Override
+                public void onResponse(Call<FilmeDetalhes> call, Response<FilmeDetalhes> response) {
+                    onFinishedListener.onFinishedRequestFilme(response.body());
+                }
+
+                @Override
+                public void onFailure(Call<FilmeDetalhes> call, Throwable t) {
+                    onFinishedListener.onFailureRequestFilme(t);
+
+                }
+            });
+        } else if (mediaType.equals("tv")){
+            Call<TvDetalhes> call = filmeInterface.detalhesTv(idFilme,apiKey, idioma);
+            call.enqueue(new Callback<TvDetalhes>() {
+                @Override
+                public void onResponse(Call<TvDetalhes> call, Response<TvDetalhes> response) {
+                    onFinishedListener.onFinishedRequestTv(response.body());
+                }
+
+                @Override
+                public void onFailure(Call<TvDetalhes> call, Throwable t) {
+                    onFinishedListener.onFailureRequestTv(t);
+
+                }
+            });
         }else {
             Call<FilmeDetalhes> call = filmeInterface.detalhesFilme(idFilme,apiKey, idioma);
             call.enqueue(new Callback<FilmeDetalhes>() {

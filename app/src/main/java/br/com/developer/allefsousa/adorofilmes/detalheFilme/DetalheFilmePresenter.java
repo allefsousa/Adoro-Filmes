@@ -41,6 +41,7 @@ public class DetalheFilmePresenter implements DetalheFilmeContract.presenter,Det
 
     }
 
+
     @Override
     public void onFailureRequestFilme(Throwable t) {
 

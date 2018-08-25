@@ -28,10 +28,8 @@ public class Result implements Serializable {
     @Expose
     private String backdropPath;
     @SerializedName("vote_average")
-    @Expose
     private String voteAverage;
     @SerializedName("media_type")
-    @Expose
     private String mediaType;
     @SerializedName("first_air_date")
     @Expose

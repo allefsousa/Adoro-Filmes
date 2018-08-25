@@ -110,6 +110,14 @@ public class DetalheFilmeActivity extends AppCompatActivity implements DetalheFi
 
     @Override
     public void atualizaUiTv(TvDetalhes tvDetalhes) {
+        tNomeDetalhe.setText(tvDetalhes.getName());
+        sinopse.setText(tvDetalhes.getOverview());
+        tlancamento.setText(tvDetalhes.getFirstAirDate());
+
+        RequestOptions options = new RequestOptions()
+                .placeholder(R.drawable.placehol)
+                .priority(Priority.HIGH);
+        Glide.with(this).load(imageBaseUrl + tvDetalhes.getPosterPath()).apply(options).transition(DrawableTransitionOptions.withCrossFade()).into(iLogoFilme);
 
 
     }
@@ -118,4 +126,5 @@ public class DetalheFilmeActivity extends AppCompatActivity implements DetalheFi
     public void erroAoBuscarDetalhes() {
 
     }
+
 }

@@ -27,6 +27,7 @@ public interface DetalheFilmeContract {
         void atualizaUiTv(TvDetalhes tvDetalhes);
 
         void erroAoBuscarDetalhes();
+
     }
 
     interface presenter {
