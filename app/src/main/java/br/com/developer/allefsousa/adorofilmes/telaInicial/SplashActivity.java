@@ -3,10 +3,13 @@ package br.com.developer.allefsousa.adorofilmes.telaInicial;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import br.com.developer.allefsousa.adorofilmes.R;
 import br.com.developer.allefsousa.adorofilmes.pesquisarFilme.PesquisaActivity;
@@ -30,6 +33,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
+        Log.d("Instance ID", FirebaseInstanceId.getInstance().getId());
         fadeInAnimation = AnimationUtils.loadAnimation(SplashActivity.this, android.R.anim.slide_in_left);
         fadeInAnimation2 = AnimationUtils.loadAnimation(SplashActivity.this, android.R.anim.fade_in);
         textView.setAnimation(fadeInAnimation);

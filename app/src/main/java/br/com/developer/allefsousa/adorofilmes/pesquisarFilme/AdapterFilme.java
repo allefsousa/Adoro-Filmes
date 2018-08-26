@@ -29,8 +29,7 @@ import br.com.developer.allefsousa.adorofilmes.data.Result;
 
 public class AdapterFilme extends RecyclerView.Adapter<AdapterFilme.ViewHolder> {
     private final String imageBaseUrl = "https://image.tmdb.org/t/p/w500/";
-    SimpleDateFormat dt1 = new SimpleDateFormat("dd-mm-yyyyy");
-    private Context context;
+        private Context context;
     private List<Result> filmeList = new ArrayList<>();
     private RecyclerItemClickListener recyclerItemClickListener;
 

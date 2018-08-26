@@ -11,6 +11,10 @@ import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import br.com.developer.allefsousa.adorofilmes.R;
 import br.com.developer.allefsousa.adorofilmes.data.FilmeDetalhes;
 import br.com.developer.allefsousa.adorofilmes.data.Result;
@@ -96,9 +100,24 @@ public class DetalheFilmeActivity extends AppCompatActivity implements DetalheFi
 
     @Override
     public void atualizaUi(FilmeDetalhes filme) {
+        String dataSemFormato = filme.getReleaseDate();
+        String dataFormatada = "";
+
+        if (dataSemFormato != null) {
+
+
+            try {
+                SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = formato.parse(dataSemFormato);
+                formato.applyPattern("dd/MM/yyyy");
+                dataFormatada = formato.format(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
         tNomeDetalhe.setText(filme.getTitle());
         sinopse.setText(filme.getOverview());
-        tlancamento.setText(filme.getReleaseDate());
+        tlancamento.setText(dataFormatada);
 
         RequestOptions options = new RequestOptions()
                 .placeholder(R.drawable.placehol)

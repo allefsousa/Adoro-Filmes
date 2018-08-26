@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "667493525562",
+    "firebase_url": "https://adorofilmes-c0084.firebaseio.com",
+    "project_id": "adorofilmes-c0084",
+    "storage_bucket": "adorofilmes-c0084.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667493525562:android:561f8eda10c827f2",
+        "android_client_info": {
+          "package_name": "br.com.developer.allefsousa.adorofilmes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "667493525562-nvkpp3a0ibtvblcdpeqtnpebbegtc4vh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.developer.allefsousa.adorofilmes",
+            "certificate_hash": "5ccbd5e2388d8f415afaccb4a5d1e2f8161ad5d8"
+          }
+        },
+        {
+          "client_id": "667493525562-jl8a0lubr7tsem5dk8qtons8qbi29c05.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvF7vcbddsd5PytNYnP_0Fjxbpcb3KifY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "667493525562-jl8a0lubr7tsem5dk8qtons8qbi29c05.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
