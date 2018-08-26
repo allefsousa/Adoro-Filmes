@@ -31,6 +31,21 @@ public class FilmeServiceImpl implements PesquisaFilmeContract.filmeService {
                 onFinishedListener.onFailureTop(t);
             }
         });
+    } @Override
+    public void getFilmeLancamentoPage2(OnFinishedListener onFinishedListener) {
+        FilmeInterface filmeInterface = RetrofitInstance.getRetrofitInstance().create(FilmeInterface.class);
+        Call<Request> call = filmeInterface.RequestPopularPage2(apiKey,tipoFilme);
+        call.enqueue(new Callback<Request>() {
+            @Override
+            public void onResponse(Call<Request> call, Response<Request> response) {
+                onFinishedListener.onFinishedTop(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Request> call, Throwable t) {
+                onFinishedListener.onFailureTop(t);
+            }
+        });
     }
 
     @Override

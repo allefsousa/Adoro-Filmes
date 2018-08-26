@@ -66,22 +66,22 @@ public class AdapterFilmeLancamentos extends RecyclerView.Adapter<AdapterFilmeLa
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textNomeFilme;
-        TextView textDataFilme;
+//        TextView textNomeFilme;
+//        TextView textDataFilme;
         ImageView logoFilme;
         View view;
 
         public ViewHolder(View v) {
             super(v);
-            textNomeFilme = v.findViewById(R.id.TnomeFilme);
-            textDataFilme = v.findViewById(R.id.TanoLancamento);
+//            textNomeFilme = v.findViewById(R.id.TnomeFilme);
+//            textDataFilme = v.findViewById(R.id.TanoLancamento);
             logoFilme = v.findViewById(R.id.Ifilme);
             view = v.findViewById(R.id.lyt_parent);
         }
 
         private void updateUi(Result filme) {
-            textNomeFilme.setText(filme.getName());
-            textDataFilme.setText(filme.getFirstAirDate());
+//            textNomeFilme.setText(filme.getName());
+//            textDataFilme.setText(filme.getFirstAirDate());
             if (filme.getPosterPath()== null) {
                 logoFilme.setImageDrawable (context.getResources().getDrawable(R.drawable.placehol));
             } else {

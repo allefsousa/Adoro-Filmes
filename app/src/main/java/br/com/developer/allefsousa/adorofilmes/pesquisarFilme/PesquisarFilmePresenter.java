@@ -27,6 +27,7 @@ public class PesquisarFilmePresenter implements PesquisaFilmeContract.presenter,
     }
     public void BuscaLancamentos(){
         filmeService.getFilmeLancamento(this);
+        filmeService.getFilmeLancamentoPage2(this);
 
     }
 
@@ -53,10 +54,13 @@ public class PesquisarFilmePresenter implements PesquisaFilmeContract.presenter,
 
     @Override
     public void onFinishedTop(Request request) {
-        if (request.getResults() != null) {
+        if (request.getResults() != null && request.getPage()<2) {
             myView.updateUiTopFilmes(request.getResults());
-            Log.d("Allef", "onFinishedTop: "+request.getResults().size());
+
+        }else {
+            myView.updateUiTopFilmesPage2(request.getResults());
         }
+
 
     }
 

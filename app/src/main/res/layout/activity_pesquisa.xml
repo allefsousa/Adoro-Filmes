@@ -5,126 +5,143 @@
     android:layout_height="match_parent"
     android:background="@color/grey_3"
     android:fitsSystemWindows="true">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
 
-
-
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@color/colorPrimaryDark"
-            android:gravity="bottom"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
-            <android.support.v7.widget.CardView
-                android:id="@+id/search_bar"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/spacing_xxlarge"
-                android:layout_gravity="bottom"
-                android:layout_margin="@dimen/spacing_large"
-                android:theme="@style/ThemeOverlay.AppCompat.Light"
-                app:layout_collapseMode="pin">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <ImageButton
-                        android:layout_width="@dimen/spacing_xxlarge"
-                        android:layout_height="@dimen/spacing_xxlarge"
-                        android:background="@android:color/transparent"
-                        android:src="@drawable/ic_search_black_24dp"
-                        android:tint="@color/grey_60" />
-
-                    <EditText
-                        android:id="@+id/et_search"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:hint="Nome do Filme ou Serie "
-                        android:imeOptions="actionSearch"
-                        android:maxLines="1"
-                        android:singleLine="true">
-
-
-                    </EditText>
-
-                    <View
-                        android:layout_width="@dimen/spacing_large"
-                        android:layout_height="0dp" />
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-
-        </android.support.v7.widget.Toolbar>
-
-
-    </android.support.design.widget.AppBarLayout>
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/tlancamentos"
-            android:layout_width="match_parent"
-            android:layout_margin="05dp"
-            android:layout_height="match_parent"
-            android:paddingLeft="8dp"
-            android:background="@drawable/gradient"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            android:text="@string/sLancamentos" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/my_recycler_lancamentos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:scrollbars="horizontal"
-            tools:listitem="@layout/item_filme" />
-        <TextView
-            android:id="@+id/tPesquisa"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="05dp"
-            android:paddingLeft="8dp"
-            android:visibility="invisible"
-            android:background="@drawable/gradient"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            android:text="Pesquisa" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/my_recycler_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scrollbars="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:listitem="@layout/item_filme" />
+
+
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/app_bar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:fitsSystemWindows="true"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:gravity="bottom"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/search_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/spacing_xxlarge"
+                        android:layout_gravity="bottom"
+                        android:layout_margin="@dimen/spacing_large"
+                        android:theme="@style/ThemeOverlay.AppCompat.Light"
+                        app:layout_collapseMode="pin">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <ImageButton
+                                android:layout_width="@dimen/spacing_xxlarge"
+                                android:layout_height="@dimen/spacing_xxlarge"
+                                android:background="@android:color/transparent"
+                                android:src="@drawable/ic_search_black_24dp"
+                                android:tint="@color/grey_60" />
+
+                            <EditText
+                                android:id="@+id/et_search"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@android:color/transparent"
+                                android:hint="Nome do Filme ou Serie "
+                                android:imeOptions="actionSearch"
+                                android:maxLines="1"
+                                android:singleLine="true">
+
+
+                            </EditText>
+
+                            <View
+                                android:layout_width="@dimen/spacing_large"
+                                android:layout_height="0dp" />
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+
+                </android.support.v7.widget.Toolbar>
+
+
+            </android.support.design.widget.AppBarLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tlancamentos"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="05dp"
+                android:background="@drawable/gradient"
+                android:paddingLeft="8dp"
+                android:text="@string/sLancamentos"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/my_recycler_lancamentos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:scrollbars="horizontal"
+                tools:listitem="@layout/item_filme" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/my_recycler_lancamentospage2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:scrollbars="horizontal"
+                tools:listitem="@layout/item_filme" />
+
+
+            <TextView
+                android:id="@+id/tPesquisa"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="05dp"
+                android:background="@drawable/gradient"
+                android:paddingLeft="8dp"
+                android:text="Pesquisa"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:visibility="invisible" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/my_recycler_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:listitem="@layout/item_filme" />
+            </LinearLayout>
+
 
 
     </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
+

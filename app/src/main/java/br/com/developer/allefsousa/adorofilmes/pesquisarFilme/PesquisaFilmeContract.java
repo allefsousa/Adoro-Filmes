@@ -25,6 +25,8 @@ public interface PesquisaFilmeContract {
 
         void updateUiTopFilmes(List<Result> results);
         void visibilidadeTexto();
+
+        void updateUiTopFilmesPage2(List<Result> results);
     }
     interface presenter{
 
@@ -45,6 +47,8 @@ public interface PesquisaFilmeContract {
         void getFilmeArrayList(OnFinishedListener onFinishedListener, String nomeFilme);
 
         void getFilmeLancamento(OnFinishedListener onFinishedListener);
+        void getFilmeLancamentoPage2(OnFinishedListener onFinishedListener);
+        
     }
 
 

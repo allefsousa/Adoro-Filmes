@@ -35,6 +35,8 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
 
     @BindView(R.id.my_recycler_lancamentos)
     RecyclerView recyclerViewlancamentos;
+    @BindView(R.id.my_recycler_lancamentospage2)
+    RecyclerView recyclerViewPage2;
     @BindView(R.id.my_recycler_view)
     RecyclerView recyclerViewfilme;
     @BindView(R.id.et_search)
@@ -129,6 +131,8 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
         texBusca.setVisibility(View.VISIBLE);
     }
 
+
+
     @Override
     public void Limpar() {
         editFilme.getText().clear();
@@ -145,5 +149,11 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
         adapterFilme2 = new AdapterFilmeLancamentos(PesquisaActivity.this, results, recyclerItemClickListener);
         recyclerViewlancamentos.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerViewlancamentos.setAdapter(adapterFilme2);
+    }
+    @Override
+    public void updateUiTopFilmesPage2(List<Result> results) {
+        adapterFilme2 = new AdapterFilmeLancamentos(PesquisaActivity.this, results, recyclerItemClickListener);
+        recyclerViewPage2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
+        recyclerViewPage2.setAdapter(adapterFilme2);
     }
 }
