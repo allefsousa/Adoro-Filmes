@@ -141,7 +141,6 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
     @Override
     public void ErroResquest(Throwable t) {
         Toast.makeText(this, "Erro " + t.getMessage(), Toast.LENGTH_LONG).show();
-        Log.e("Allef", "ErroResquest: " + t.getMessage());
     }
 
     @Override

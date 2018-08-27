@@ -1,6 +1,7 @@
 package br.com.developer.allefsousa.adorofilmes.detalheFilme;
 
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
@@ -37,6 +38,8 @@ public class DetalheFilmeActivity extends AppCompatActivity implements DetalheFi
     TextView sinopse;
     @BindView(R.id.tdataLancamento)
     TextView tlancamento;
+    @BindView(R.id.app_bar_layout)
+    AppBarLayout appBarLayout;
 
     private DetalheFilmeContract.presenter mPresenter;
 
@@ -49,6 +52,25 @@ public class DetalheFilmeActivity extends AppCompatActivity implements DetalheFi
         initToolbar();
         filmeDetalhes = (Result) getIntent().getSerializableExtra("filme");
         recuperaDetalhe(filmeDetalhes.getId(), filmeDetalhes.getMediaType());
+
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+
+                if (Math.abs(verticalOffset)-appBarLayout.getTotalScrollRange() == 0)
+                {
+                    toolbar.setTitle("Detalhes");
+                    getSupportActionBar().setTitle("Detalhes");
+
+
+                }
+                else
+                {
+                    getSupportActionBar().setTitle(" ");
+                    toolbar.setTitle("Detalhes");
+                }
+            }
+        });
     }
 
     /**
@@ -67,7 +89,6 @@ public class DetalheFilmeActivity extends AppCompatActivity implements DetalheFi
     private void initToolbar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Detalhes");
 
 
     }
