@@ -1,8 +1,14 @@
 package br.com.developer.allefsousa.adorofilmes.pesquisarFilme;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
+import android.transition.Explode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +26,7 @@ import java.util.List;
 
 import br.com.developer.allefsousa.adorofilmes.R;
 import br.com.developer.allefsousa.adorofilmes.data.Result;
+import br.com.developer.allefsousa.adorofilmes.detalheFilme.DetalheFilmeActivity;
 
 /**
  * Created by allef on 11/08/2018.
@@ -51,8 +58,25 @@ public class AdapterFilmeLancamentos extends RecyclerView.Adapter<AdapterFilmeLa
         Result filme = filmeList.get(position);
         holder.updateUi(filme);
 
-        holder.view.setOnClickListener(v ->
-                recyclerItemClickListener.onItemClick(filmeList.get(position)));
+        holder.view.setOnClickListener((View v) ->{
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+                View vv = v.findViewById(R.id.Ifilme);
+
+                ActivityOptionsCompat optionsCompat =  ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, Pair.create(vv,"allef"));
+
+                Intent inten = new Intent(context, DetalheFilmeActivity.class);
+                inten.putExtra("filme",filme);
+                context.startActivity(inten,optionsCompat.toBundle());
+
+
+            }else {
+                recyclerItemClickListener.onItemClick(filmeList.get(position));
+            }
+
+
+
+        });
 
 
     }

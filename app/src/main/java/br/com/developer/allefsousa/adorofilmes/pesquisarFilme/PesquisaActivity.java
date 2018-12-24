@@ -1,23 +1,33 @@
 package br.com.developer.allefsousa.adorofilmes.pesquisarFilme;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.media.Image;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.firebase.dynamiclinks.DynamicLink;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.ShortDynamicLink;
 
 import java.util.List;
 
@@ -50,15 +60,32 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
     private AdapterFilme adapterFilme;
     private AdapterFilmeLancamentos adapterFilme2;
     private RecyclerItemClickListener recyclerItemClickListener;
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            TransitionInflater inflater = TransitionInflater.from(this);
+            Transition transition = inflater.inflateTransition(R.transition.traasitions);
+
+            getWindow().setSharedElementEnterTransition(transition);
+
+
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pesquisa);
         ButterKnife.bind(this);
+        MobileAds.initialize(this, "ca-app-pub-2296995403494910~8764833228");
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-2296995403494910/6111278327");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
         mPresenter = new PesquisarFilmePresenter(this, new FilmeServiceImpl());
         editFilme.requestFocus();
         editFilme.setFocusable(true);
+        AdView mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         editFilme.setOnEditorActionListener((textView, i, keyEvent) -> {
             if (i == EditorInfo.IME_ACTION_SEARCH) {
@@ -72,6 +99,7 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
             return false;
         });
 
+
         buscaTopFilmes();
         recyclerItemClickListener = filme -> {
             Intent inten = new Intent(PesquisaActivity.this, DetalheFilmeActivity.class);
@@ -79,6 +107,11 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
             startActivity(inten);
         };
 
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+//        AdView adView = new AdView(this);
+//        adView.setAdSize(AdSize.BANNER);
+//        adView.setAdUnitId("ca-app-pub-2296995403494910/7451751552");
 
 
     }

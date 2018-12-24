@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import br.com.developer.allefsousa.adorofilmes.R;
@@ -33,6 +34,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
+        MobileAds.initialize(this, "ca-app-pub-2296995403494910~8764833228");
         Log.d("Instance ID", FirebaseInstanceId.getInstance().getId());
         fadeInAnimation = AnimationUtils.loadAnimation(SplashActivity.this, android.R.anim.slide_in_left);
         fadeInAnimation2 = AnimationUtils.loadAnimation(SplashActivity.this, android.R.anim.fade_in);
@@ -74,4 +76,6 @@ public class SplashActivity extends AppCompatActivity {
         };
         splashTread.start();
     }
+
+
 }

@@ -3,6 +3,8 @@ package br.com.developer.allefsousa.adorofilmes.detalheFilme;
 import android.text.TextUtils;
 
 import br.com.developer.allefsousa.adorofilmes.data.FilmeDetalhes;
+import br.com.developer.allefsousa.adorofilmes.data.Trailer;
+import br.com.developer.allefsousa.adorofilmes.data.TrailerDetalhes;
 import br.com.developer.allefsousa.adorofilmes.data.TvDetalhes;
 
 /**
@@ -10,7 +12,8 @@ import br.com.developer.allefsousa.adorofilmes.data.TvDetalhes;
  */
 
 public class DetalheFilmePresenter implements DetalheFilmeContract.presenter,DetalheFilmeContract.detalherService.OnFinishedListenerFilme,
-        DetalheFilmeContract.detalherService.OnFinishedListenerTv{
+        DetalheFilmeContract.detalherService.OnFinishedListenerTv,DetalheFilmeContract.detalherService.OnFinishedListenerTrailer{
+
     private DetalheFilmeContract.view mView;
     private DetalheFilmeContract.detalherService detalherService;
 
@@ -26,6 +29,15 @@ public class DetalheFilmePresenter implements DetalheFilmeContract.presenter,Det
             mView.idFilmeNulla();
         }else {
             detalherService.getFilmeArrayList(this,idFilme,mediaType);
+        }
+    }
+
+    @Override
+    public void recuperarTrailer(String filmeid) {
+        if (TextUtils.isEmpty(filmeid)){
+            mView.idFilmeNulla();
+        }else {
+            detalherService.getFilmeTrailer(this,filmeid);
         }
     }
 
@@ -60,6 +72,19 @@ public class DetalheFilmePresenter implements DetalheFilmeContract.presenter,Det
 
     @Override
     public void onFailureRequestTv(Throwable t) {
+
+    }
+
+
+    @Override
+    public void onFinishedRequestTrailer(Trailer trailer) {
+        mView.atualizaTrailers(trailer);
+
+    }
+
+
+    @Override
+    public void onFailureRequestTrailer(Throwable t) {
 
     }
 }

@@ -1,6 +1,8 @@
 package br.com.developer.allefsousa.adorofilmes.detalheFilme;
 
 import br.com.developer.allefsousa.adorofilmes.data.FilmeDetalhes;
+import br.com.developer.allefsousa.adorofilmes.data.Trailer;
+import br.com.developer.allefsousa.adorofilmes.data.TrailerDetalhes;
 import br.com.developer.allefsousa.adorofilmes.data.TvDetalhes;
 import br.com.developer.allefsousa.adorofilmes.data.source.remote.FilmeInterface;
 import br.com.developer.allefsousa.adorofilmes.data.source.remote.RetrofitInstance;
@@ -65,6 +67,23 @@ public class DetalheFilmeImp implements DetalheFilmeContract.detalherService {
                 }
             });
         }
+
+    }
+
+    @Override
+    public void getFilmeTrailer(DetalheFilmePresenter onFinishedListener, String idFilme) {
+        Call<Trailer> call = filmeInterface.trailerTV(idFilme,apiKey);
+        call.enqueue(new Callback<Trailer>() {
+            @Override
+            public void onResponse(Call<Trailer> call, Response<Trailer> response) {
+                onFinishedListener.onFinishedRequestTrailer(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Trailer> call, Throwable t) {
+
+            }
+        });
 
     }
 

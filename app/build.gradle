@@ -6,9 +6,10 @@ android {
         applicationId "br.com.developer.allefsousa.adorofilmes"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 2
-        versionName "1.1"
+        versionCode 6
+        versionName "1.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -16,13 +17,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
     }
     testOptions {
         unitTests {
@@ -34,10 +35,11 @@ android {
             abortOnError false
         }
     }
+
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
@@ -62,5 +64,9 @@ dependencies {
     testImplementation 'org.mockito:mockito-android:2.7.22'
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.google.firebase:firebase-inappmessaging-display:17.0.0'
+    implementation 'com.google.firebase:firebase-dynamic-links:16.0.1'
+    implementation 'com.google.firebase:firebase-messaging:17.0.0'
+    implementation 'com.google.android.gms:play-services-ads:15.0.1'
+    compile files('libs/YouTubeAndroidPlayerApi.jar')
 }
 apply plugin: 'com.google.gms.google-services'

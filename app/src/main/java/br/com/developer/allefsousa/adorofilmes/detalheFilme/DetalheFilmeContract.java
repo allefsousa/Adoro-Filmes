@@ -1,6 +1,8 @@
 package br.com.developer.allefsousa.adorofilmes.detalheFilme;
 
 import br.com.developer.allefsousa.adorofilmes.data.FilmeDetalhes;
+import br.com.developer.allefsousa.adorofilmes.data.Trailer;
+import br.com.developer.allefsousa.adorofilmes.data.TrailerDetalhes;
 import br.com.developer.allefsousa.adorofilmes.data.TvDetalhes;
 
 /**
@@ -11,6 +13,7 @@ public interface DetalheFilmeContract {
     interface view {
 
         void recuperaDetalhe(String id, String mediaType);
+        void recuperaTrailer(String Filmeid);
 
         void idFilmeNulla();
 
@@ -28,16 +31,20 @@ public interface DetalheFilmeContract {
 
         void erroAoBuscarDetalhes();
 
+        void atualizaTrailers(Trailer trailer);
     }
 
     interface presenter {
 
         void recuperaDetalhes(String idFilme, String mediaType);
+
+        void recuperarTrailer(String filmeid);
     }
 
     interface detalherService {
 
         void getFilmeArrayList(DetalheFilmePresenter onFinishedListener, String idFilme, String mediaType);
+        void getFilmeTrailer(DetalheFilmePresenter onFinishedListener, String idFilme);
 
         void getTvArrayList(DetalheFilmePresenter onFinishedListener, String idSerie);
 
@@ -46,6 +53,11 @@ public interface DetalheFilmeContract {
             void onFinishedRequestFilme(FilmeDetalhes filmeDetalhes);
 
             void onFailureRequestFilme(Throwable t);
+        }
+        interface OnFinishedListenerTrailer {
+            void onFinishedRequestTrailer(Trailer trailer);
+
+            void onFailureRequestTrailer(Throwable t);
         }
 
         interface OnFinishedListenerTv {

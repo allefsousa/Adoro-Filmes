@@ -15,9 +15,7 @@ public class TvDetalhes implements Serializable {
     @SerializedName("backdrop_path")
     @Expose
     private String backdropPath;
-    @SerializedName("created_by")
-    @Expose
-    private List<CreatedBy> createdBy = new ArrayList<CreatedBy>();
+
     @SerializedName("episode_run_time")
     @Expose
     private List<Integer> episodeRunTime = new ArrayList<Integer>();
@@ -128,10 +126,9 @@ public class TvDetalhes implements Serializable {
      * @param episodeRunTime
      * @param popularity
      */
-    public TvDetalhes(String backdropPath, List<CreatedBy> createdBy, List<Integer> episodeRunTime, String firstAirDate, String homepage, Integer id, Boolean inProduction, List<String> languages, String lastAirDate, LastEpisodeToAir lastEpisodeToAir, String name, NextEpisodeToAir nextEpisodeToAir, Integer numberOfEpisodes, Integer numberOfSeasons, List<String> originCountry, String originalLanguage, String originalName, String overview, Double popularity, String posterPath, List<Object> productionCompanies, List<Season> seasons, String status, String type, Double voteAverage, Integer voteCount) {
-        super();
+    public TvDetalhes(String backdropPath, List<Integer> episodeRunTime, String firstAirDate, String homepage, Integer id, Boolean inProduction, List<String> languages, String lastAirDate, LastEpisodeToAir lastEpisodeToAir, String name, NextEpisodeToAir nextEpisodeToAir, Integer numberOfEpisodes, Integer numberOfSeasons, List<String> originCountry, String originalLanguage, String originalName, String overview, Double popularity, String posterPath, List<Object> productionCompanies, List<Season> seasons, String status, String type, Double voteAverage, Integer voteCount) {
         this.backdropPath = backdropPath;
-        this.createdBy = createdBy;
+
         this.episodeRunTime = episodeRunTime;
         this.firstAirDate = firstAirDate;
         this.homepage = homepage;
@@ -164,14 +161,6 @@ public class TvDetalhes implements Serializable {
 
     public void setBackdropPath(String backdropPath) {
         this.backdropPath = backdropPath;
-    }
-
-    public List<CreatedBy> getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(List<CreatedBy> createdBy) {
-        this.createdBy = createdBy;
     }
 
     public List<Integer> getEpisodeRunTime() {
