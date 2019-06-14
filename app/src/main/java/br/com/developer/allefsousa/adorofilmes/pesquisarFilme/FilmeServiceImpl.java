@@ -8,9 +8,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by allef on 06/08/2018.
- */
+
 
 public class FilmeServiceImpl implements PesquisaFilmeContract.filmeService {
     private final String apiKey = "745509647d8c3e2ac4c7b0d5ef2d7352";

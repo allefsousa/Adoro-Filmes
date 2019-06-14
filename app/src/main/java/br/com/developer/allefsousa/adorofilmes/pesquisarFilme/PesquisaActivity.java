@@ -1,7 +1,9 @@
 package br.com.developer.allefsousa.adorofilmes.pesquisarFilme;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
@@ -25,6 +27,15 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.InstallState;
+import com.google.android.play.core.install.InstallStateUpdatedListener;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.android.play.core.tasks.OnSuccessListener;
+import com.google.android.play.core.tasks.Task;
 import com.google.firebase.dynamiclinks.DynamicLink;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.ShortDynamicLink;
@@ -34,13 +45,14 @@ import java.util.List;
 import br.com.developer.allefsousa.adorofilmes.R;
 import br.com.developer.allefsousa.adorofilmes.data.Result;
 import br.com.developer.allefsousa.adorofilmes.detalheFilme.DetalheFilmeActivity;
+import br.com.developer.allefsousa.adorofilmes.telaInicial.SplashActivity;
 import br.com.developer.allefsousa.adorofilmes.utils.SpacingItemDecoration;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static br.com.developer.allefsousa.adorofilmes.utils.DpUtils.dpToPx;
 
-public class PesquisaActivity extends AppCompatActivity implements PesquisaFilmeContract.view {
+public class PesquisaActivity extends AppCompatActivity implements PesquisaFilmeContract.view, InstallStateUpdatedListener {
 
 
     @BindView(R.id.my_recycler_lancamentos)
@@ -55,6 +67,8 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
     Image image;
     @BindView(R.id.tPesquisa)
     TextView texBusca;
+    private static final int MY_REQUEST_CODE = 17300;
+
 
     private PesquisaFilmeContract.presenter mPresenter;
     private AdapterFilme adapterFilme;
@@ -62,15 +76,14 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
     private RecyclerItemClickListener recyclerItemClickListener;
     private InterstitialAd mInterstitialAd;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             TransitionInflater inflater = TransitionInflater.from(this);
             Transition transition = inflater.inflateTransition(R.transition.traasitions);
-
             getWindow().setSharedElementEnterTransition(transition);
-
-
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pesquisa);
@@ -86,6 +99,7 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
         AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
 
         editFilme.setOnEditorActionListener((textView, i, keyEvent) -> {
             if (i == EditorInfo.IME_ACTION_SEARCH) {
@@ -112,9 +126,67 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
 //        AdView adView = new AdView(this);
 //        adView.setAdSize(AdSize.BANNER);
 //        adView.setAdUnitId("ca-app-pub-2296995403494910/7451751552");
+//        checkUpdate(this);
+        AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(this);
+        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+
+        appUpdateInfoTask.addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
+            @Override
+            public void onSuccess(AppUpdateInfo appUpdateInfo) {
+                if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
+
+                    try {
+                        appUpdateManager.startUpdateFlowForResult(appUpdateInfo,
+                                AppUpdateType.FLEXIBLE,
+                                PesquisaActivity.this,
+                                0);
+                    } catch (IntentSender.SendIntentException e) {
+                        e.printStackTrace();
+                    }
+
+                } else {
+                    Log.d("Support in-app-update", "UPDATE_NOT_AVAILABLE");
+                }
+            }
+        });
 
 
     }
+    public void checkUpdate(Context context) {
+        AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(context);
+        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+
+        appUpdateInfoTask.addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
+            @Override
+            public void onSuccess(AppUpdateInfo appUpdateInfo) {
+                if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
+
+                    try {
+                        appUpdateManager.startUpdateFlowForResult(appUpdateInfo,
+                                AppUpdateType.FLEXIBLE,
+                                PesquisaActivity.this,
+                                0);
+                    } catch (IntentSender.SendIntentException e) {
+                        e.printStackTrace();
+                    }
+
+                } else {
+                    Log.d("Support in-app-update", "UPDATE_NOT_AVAILABLE");
+                }
+            }
+        });
+    }
+//    private void requestUpdate(AppUpdateInfo appUpdateInfo, int flow_type) {
+//        try {
+//            appUpdateManager.startUpdateFlowForResult(appUpdateInfo,
+//                    AppUpdateType.IMMEDIATE,
+//                    this,
+//                    MY_REQUEST_CODE);
+//
+//        } catch (IntentSender.SendIntentException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     private void buscaTopFilmes() {
         mPresenter.BuscaLancamentos();
@@ -187,5 +259,10 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
         adapterFilme2 = new AdapterFilmeLancamentos(PesquisaActivity.this, results, recyclerItemClickListener);
         recyclerViewPage2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
         recyclerViewPage2.setAdapter(adapterFilme2);
+    }
+
+    @Override
+    public void onStateUpdate(InstallState installState) {
+
     }
 }
