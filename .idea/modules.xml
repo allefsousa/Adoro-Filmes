@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Adoro-Filmes.iml" filepath="$PROJECT_DIR$/Adoro-Filmes.iml" />
-      <module fileurl="file://$PROJECT_DIR$/AdoroFilmes.iml" filepath="$PROJECT_DIR$/AdoroFilmes.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
