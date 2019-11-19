@@ -1,28 +1,16 @@
 package br.com.developer.allefsousa.adorofilmes.telaInicial;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 
+import com.amplitude.api.Amplitude;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.play.core.appupdate.AppUpdateInfo;
-import com.google.android.play.core.appupdate.AppUpdateManager;
-import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
-import com.google.android.play.core.install.model.ActivityResult;
-import com.google.android.play.core.install.model.AppUpdateType;
-import com.google.android.play.core.install.model.UpdateAvailability;
-import com.google.android.play.core.tasks.OnSuccessListener;
-import com.google.android.play.core.tasks.Task;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 import br.com.developer.allefsousa.adorofilmes.R;
 import br.com.developer.allefsousa.adorofilmes.pesquisarFilme.PesquisaActivity;
@@ -41,9 +29,6 @@ public class SplashActivity extends AppCompatActivity {
     @BindView(R.id.iImage)
     ImageView imageView;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +36,7 @@ public class SplashActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         MobileAds.initialize(this, "ca-app-pub-2296995403494910~8764833228");
+        Amplitude.getInstance().logEvent("Splash Activity open");
 //        Log.d("Instance ID", FirebaseInstanceId.getInstance().getId());
         fadeInAnimation = AnimationUtils.loadAnimation(SplashActivity.this, android.R.anim.slide_in_left);
         fadeInAnimation2 = AnimationUtils.loadAnimation(SplashActivity.this, android.R.anim.fade_in);

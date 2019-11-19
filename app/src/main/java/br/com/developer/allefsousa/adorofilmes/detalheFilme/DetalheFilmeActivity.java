@@ -1,49 +1,32 @@
 package br.com.developer.allefsousa.adorofilmes.detalheFilme;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.util.Pair;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.transition.ChangeBounds;
+import androidx.annotation.NonNull;
+
+import com.amplitude.api.Amplitude;
+import com.google.android.material.appbar.AppBarLayout;
+
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import android.transition.Transition;
 import android.transition.TransitionInflater;
-import android.util.Log;
 import android.view.View;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.Priority;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
-import com.google.android.youtube.player.internal.y;
-import com.google.firebase.dynamiclinks.DynamicLink;
-import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
-import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
-import com.google.firebase.dynamiclinks.ShortDynamicLink;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -53,7 +36,6 @@ import br.com.developer.allefsousa.adorofilmes.R;
 import br.com.developer.allefsousa.adorofilmes.data.FilmeDetalhes;
 import br.com.developer.allefsousa.adorofilmes.data.Result;
 import br.com.developer.allefsousa.adorofilmes.data.Trailer;
-import br.com.developer.allefsousa.adorofilmes.data.TrailerDetalhes;
 import br.com.developer.allefsousa.adorofilmes.data.TvDetalhes;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -77,7 +59,11 @@ public class DetalheFilmeActivity extends YouTubeBaseActivity implements Detalhe
     TextView tlancamento;
     @BindView(R.id.app_bar_layout)
     AppBarLayout appBarLayout;
+
+    @BindView(R.id.collapsing_toolbar)
+    CollapsingToolbarLayout collapsingToolbarLayout;
     YouTubePlayerView youTubePlayerView;
+    private String nameMovie = "";
 
 
 
@@ -94,24 +80,8 @@ public class DetalheFilmeActivity extends YouTubeBaseActivity implements Detalhe
 
         }
         super.onCreate(savedInstanceState);
-//         youTubePlayerView = new YouTubePlayerView(this);
-//        youTubePlayerView.initialize(API, new YouTubePlayer.OnInitializedListener() {
-//            @Override
-//            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-//
-//                youTubePlayer.cueVideo(VIDEO_ID);
-//
-////                Log.d("Allef","Allef"+trailer.getResults().get(0).getKey());
-////                Toast.makeText(DetalheFilmeActivity.this, ""+trailer.getResults().get(0).getKey(), Toast.LENGTH_SHORT).show();
-//
-//
-//            }
-//
-//            @Override
-//            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-//                Toast.makeText(DetalheFilmeActivity.this, "Falha ao reproduzir video "+youTubeInitializationResult.getErrorDialog(DetalheFilmeActivity.this,0), Toast.LENGTH_SHORT).show();
-//            }
-//        });
+
+        Amplitude.getInstance().logEvent("Detalhe Filme Activity");
 
         setContentView(R.layout.activity_detalhe_filme);
         ButterKnife.bind(this);
@@ -124,31 +94,30 @@ public class DetalheFilmeActivity extends YouTubeBaseActivity implements Detalhe
         mAdView.loadAd(adRequest);
         mAdView1.loadAd(adRequest);
         mPresenter = new DetalheFilmePresenter(this, new DetalheFilmeImp());
-//        initToolbar();
         filmeDetalhes = (Result) getIntent().getSerializableExtra("filme");
         recuperaDetalhe(filmeDetalhes.getId(), filmeDetalhes.getMediaType());
         recuperaTrailer(filmeDetalhes.getId());
 
 
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            boolean isShow = true;
+            int scrollRange = -1;
+
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
 
-                if (Math.abs(verticalOffset)-appBarLayout.getTotalScrollRange() == 0)
-                {
-                    toolbar.setTitle(" ");
-
-
-//                    toolbar.getSupportActionBar().setTitle("Detalhes");
-
-
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
                 }
-                else
-                {
-//                    getSupportActionBar().setTitle(" ");
-                    toolbar.setTitle(" ");
+                if (scrollRange + verticalOffset == 0) {
+                    collapsingToolbarLayout.setTitle(nameMovie);
+                    isShow = true;
+                } else if(isShow) {
+                    collapsingToolbarLayout.setTitle(" ");//careful there should a space between double quote otherwise it wont work
+                    isShow = false;
                 }
             }
+
         });
 
 
@@ -177,14 +146,6 @@ public class DetalheFilmeActivity extends YouTubeBaseActivity implements Detalhe
     @Override
     public void recuperaTrailer(String Filmeid) {
         mPresenter.recuperarTrailer(Filmeid);
-    }
-
-
-    private void initToolbar() {
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
     }
 
 
@@ -230,6 +191,7 @@ public class DetalheFilmeActivity extends YouTubeBaseActivity implements Detalhe
                 e.printStackTrace();
             }
         }
+        nameMovie = filme.getTitle();
         tNomeDetalhe.setText(filme.getTitle());
         sinopse.setText(filme.getOverview());
         tlancamento.setText(dataFormatada);
@@ -264,8 +226,6 @@ public class DetalheFilmeActivity extends YouTubeBaseActivity implements Detalhe
             youTubePlayerView.initialize(API, new YouTubePlayer.OnInitializedListener() {
                 @Override
                 public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-//                    youTubePlayer.loadVideo(trailer.getResults().get(0).getKey());
-////                    youTubePlayer.pause();
                     youTubePlayer.cueVideo(trailer.getResults().get(0).getKey());
 
                     // Hiding player controls

@@ -5,13 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.media.Image;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.util.Log;
@@ -23,6 +22,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amplitude.api.Amplitude;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
@@ -36,16 +36,12 @@ import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.android.play.core.tasks.OnSuccessListener;
 import com.google.android.play.core.tasks.Task;
-import com.google.firebase.dynamiclinks.DynamicLink;
-import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
-import com.google.firebase.dynamiclinks.ShortDynamicLink;
 
 import java.util.List;
 
 import br.com.developer.allefsousa.adorofilmes.R;
 import br.com.developer.allefsousa.adorofilmes.data.Result;
 import br.com.developer.allefsousa.adorofilmes.detalheFilme.DetalheFilmeActivity;
-import br.com.developer.allefsousa.adorofilmes.telaInicial.SplashActivity;
 import br.com.developer.allefsousa.adorofilmes.utils.SpacingItemDecoration;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -89,6 +85,8 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
         setContentView(R.layout.activity_pesquisa);
         ButterKnife.bind(this);
         MobileAds.initialize(this, "ca-app-pub-2296995403494910~8764833228");
+        Amplitude.getInstance().logEvent("Pesquisa Filme Activity");
+
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-2296995403494910/6111278327");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
