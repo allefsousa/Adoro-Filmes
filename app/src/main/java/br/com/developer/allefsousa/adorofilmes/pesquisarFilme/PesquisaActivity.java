@@ -36,6 +36,7 @@ import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.android.play.core.tasks.OnSuccessListener;
 import com.google.android.play.core.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.List;
 
@@ -46,6 +47,7 @@ import br.com.developer.allefsousa.adorofilmes.utils.SpacingItemDecoration;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static br.com.developer.allefsousa.adorofilmes.AppApplication.mFirebaseAnalytics;
 import static br.com.developer.allefsousa.adorofilmes.utils.DpUtils.dpToPx;
 
 public class PesquisaActivity extends AppCompatActivity implements PesquisaFilmeContract.view, InstallStateUpdatedListener {
@@ -86,6 +88,8 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
         ButterKnife.bind(this);
         MobileAds.initialize(this, "ca-app-pub-2296995403494910~8764833228");
         Amplitude.getInstance().logEvent("Pesquisa Filme Activity");
+
+        mFirebaseAnalytics.setCurrentScreen(this, "Pesquisa Filme Activity", null /* class override */);
 
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-2296995403494910/6111278327");

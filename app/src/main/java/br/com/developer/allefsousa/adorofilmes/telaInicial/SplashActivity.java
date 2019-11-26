@@ -17,6 +17,8 @@ import br.com.developer.allefsousa.adorofilmes.pesquisarFilme.PesquisaActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static br.com.developer.allefsousa.adorofilmes.AppApplication.mFirebaseAnalytics;
+
 public class SplashActivity extends AppCompatActivity {
     Thread splashTread;
     Animation fadeInAnimation;
@@ -37,6 +39,8 @@ public class SplashActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         MobileAds.initialize(this, "ca-app-pub-2296995403494910~8764833228");
         Amplitude.getInstance().logEvent("Splash Activity open");
+        mFirebaseAnalytics.setCurrentScreen(this, "Splash Activity open", null /* class override */);
+
 //        Log.d("Instance ID", FirebaseInstanceId.getInstance().getId());
         fadeInAnimation = AnimationUtils.loadAnimation(SplashActivity.this, android.R.anim.slide_in_left);
         fadeInAnimation2 = AnimationUtils.loadAnimation(SplashActivity.this, android.R.anim.fade_in);

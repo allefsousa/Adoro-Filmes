@@ -27,6 +27,7 @@ import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,6 +40,8 @@ import br.com.developer.allefsousa.adorofilmes.data.Trailer;
 import br.com.developer.allefsousa.adorofilmes.data.TvDetalhes;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static br.com.developer.allefsousa.adorofilmes.AppApplication.mFirebaseAnalytics;
 
 public class DetalheFilmeActivity extends YouTubeBaseActivity implements DetalheFilmeContract.view {
     private static final String API = "AIzaSyA0TRZ_qJ993vT58oiCobu9WSleAz1KzrM";
@@ -97,6 +100,15 @@ public class DetalheFilmeActivity extends YouTubeBaseActivity implements Detalhe
         filmeDetalhes = (Result) getIntent().getSerializableExtra("filme");
         recuperaDetalhe(filmeDetalhes.getId(), filmeDetalhes.getMediaType());
         recuperaTrailer(filmeDetalhes.getId());
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, filmeDetalhes.getId());
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, filmeDetalhes.getName());
+        bundle.putString(FirebaseAnalytics.Param.ITEM_VARIANT, filmeDetalhes.getOriginalName());
+        bundle.putString("EVENTO", "VISUALIZOU O FILME");
+        mFirebaseAnalytics.logEvent("visualizou_detalhes", bundle);
+        mFirebaseAnalytics.setCurrentScreen(this, "Detalhe Filme Activity", null /* class override */);
+
+
 
 
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
@@ -206,13 +218,6 @@ public class DetalheFilmeActivity extends YouTubeBaseActivity implements Detalhe
         tNomeDetalhe.setText(tvDetalhes.getName());
         sinopse.setText(tvDetalhes.getOverview());
         tlancamento.setText(tvDetalhes.getFirstAirDate());
-
-//        RequestOptions options = new RequestOptions()
-//                .placeholder(R.drawable.placehol)
-//                .priority(Priority.HIGH);
-//        Glide.with(this).load(imageBaseUrl + tvDetalhes.getPosterPath()).apply(options).transition(DrawableTransitionOptions.withCrossFade()).into(iLogoFilme);
-
-
     }
 
     @Override
