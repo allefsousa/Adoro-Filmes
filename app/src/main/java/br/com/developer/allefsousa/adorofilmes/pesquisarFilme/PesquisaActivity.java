@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.util.Log;
@@ -61,6 +63,9 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
     RecyclerView recyclerViewfilme;
     @BindView(R.id.et_search)
     EditText editFilme;
+
+    @BindView(R.id.viewpager)
+    ViewPager viewPagerMovie;
 
     Image image;
     @BindView(R.id.tPesquisa)
@@ -178,17 +183,6 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
             }
         });
     }
-//    private void requestUpdate(AppUpdateInfo appUpdateInfo, int flow_type) {
-//        try {
-//            appUpdateManager.startUpdateFlowForResult(appUpdateInfo,
-//                    AppUpdateType.IMMEDIATE,
-//                    this,
-//                    MY_REQUEST_CODE);
-//
-//        } catch (IntentSender.SendIntentException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     private void buscaTopFilmes() {
         mPresenter.BuscaLancamentos();
