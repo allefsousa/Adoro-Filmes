@@ -10,6 +10,8 @@
 
     <color name="grey_3">#f7f7f7</color>
     <color name="grey_60">#666666</color>
+    <color name="gray">#b2b2b2</color>
+
     <color name="overlay_dark_10">#1A000000</color>
     <color name="overlay_dark_20">#33000000</color>
     <color name="overlay_dark_30">#4D000000</color>

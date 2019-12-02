@@ -1,19 +1,22 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
     <androidx.cardview.widget.CardView
         android:id="@+id/Cfilme"
-        android:layout_width="250dp"
-        android:layout_height="220dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:elevation="8dp"
-        app:cardCornerRadius="4dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,55 +29,30 @@
             android:layout_height="wrap_content">
 
             <RelativeLayout
-                android:layout_width="250dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/TnomeFilme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    tools:text="Item Name"
+                    android:textSize="13sp"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
 
 
                 <ImageView
                     android:id="@+id/Ifilme"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:foreground="@color/overlay_dark_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:scaleType="fitXY"
                   />
-
-                <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_alignParentBottom="true"-->
-                    <!--android:layout_alignParentLeft="true"-->
-                    <!--android:layout_alignParentStart="true"-->
-                    <!--android:background="@color/overlay_dark_70"-->
-                    <!--android:gravity="center_vertical"-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:padding="@dimen/spacing_large">-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/TnomeFilme"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="0dp"-->
-                        <!--android:layout_weight="1"-->
-                        <!--android:textStyle="bold"-->
-                        <!--tools:text="Item Name"-->
-                        <!--android:textSize="13sp"-->
-                        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"-->
-                        <!--android:textColor="@android:color/white" />-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/TanoLancamento"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:textSize="10sp"-->
-                        <!--android:textStyle="bold"-->
-                        <!--tools:text="1994"-->
-                        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"-->
-                        <!--android:textColor="@android:color/white" />-->
-
-                <!--</LinearLayout>-->
 
             </RelativeLayout>
 
         </com.balysv.materialripple.MaterialRippleLayout>
 
     </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
