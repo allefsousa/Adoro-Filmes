@@ -24,14 +24,17 @@ import com.bumptech.glide.request.RequestOptions
 /**
  * @author allef.santos on 2019-11-30
  */
-class MoviesPagerAdapter( val context:Context, val list:List<Result>) : PagerAdapter() {
+class MoviesPagerAdapter : PagerAdapter() {
     private val imageBaseUrl = "https://image.tmdb.org/t/p/w500/"
+    val list:MutableList<Result> = mutableListOf()
+    private lateinit var context:Context
 
 
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
+        context = container.context
         val result = list[position]
-        val itemView: View = LayoutInflater.from(context).inflate(R.layout.item_filme_lancamento,container,false)
+        val itemView: View = LayoutInflater.from(container.context).inflate(R.layout.item_filme_lancamento,container,false)
 
         val image = itemView.findViewById<ImageView>(R.id.Ifilme)
         val tv = itemView.findViewById<TextView>(R.id.TnomeFilme)
@@ -49,7 +52,8 @@ class MoviesPagerAdapter( val context:Context, val list:List<Result>) : PagerAda
                     .into(image)
 
         }
-        itemView.setOnClickListener {
+
+        image.setOnClickListener {
             val intent = Intent(context, DetalheFilmeActivity::class.java)
             intent.putExtra("filme", result)
 
@@ -75,6 +79,14 @@ class MoviesPagerAdapter( val context:Context, val list:List<Result>) : PagerAda
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view == `object`
+    }
+
+    fun addItem(list:List<Result> ){
+        this.list.addAll(list)
+        notifyDataSetChanged()
+    } fun listClear( ){
+       list.clear()
+        notifyDataSetChanged()
     }
 
 

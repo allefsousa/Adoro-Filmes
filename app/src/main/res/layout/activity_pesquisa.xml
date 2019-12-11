@@ -2,8 +2,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:fitsSystemWindows="true">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -24,49 +25,73 @@
                     android:gravity="bottom"
                     app:title=""
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="bottom"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginRight="15dp"
+                        android:theme="@style/ThemeOverlay.AppCompat.Light"
+                        app:layout_collapseMode="pin">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/search_bar"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/spacing_xxlarge"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
                         android:layout_margin="@dimen/spacing_large"
+                        android:layout_weight="0.5"
                         android:theme="@style/ThemeOverlay.AppCompat.Light"
                         app:layout_collapseMode="pin">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <ImageButton
-                                android:layout_width="@dimen/spacing_xxlarge"
-                                android:layout_height="@dimen/spacing_xxlarge"
-                                android:background="@android:color/transparent"
-                                android:src="@drawable/ic_search_black_24dp"
-                                android:tint="@color/grey_60" />
-
-                            <EditText
-                                android:id="@+id/et_search"
-                                android:layout_width="0dp"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:background="@android:color/transparent"
-                                android:hint="Nome do Filme ou Serie "
-                                android:imeOptions="actionSearch"
-                                android:maxLines="1"
-                                android:singleLine="true">
+                                android:orientation="horizontal">
+
+                                <ImageButton
+                                    android:layout_width="@dimen/spacing_xxlarge"
+                                    android:layout_height="@dimen/spacing_xxlarge"
+                                    android:background="@android:color/transparent"
+                                    android:src="@drawable/ic_search_black_24dp"
+                                    android:tint="@color/grey_60" />
+
+                                <EditText
+                                    android:id="@+id/et_search"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:background="@android:color/transparent"
+                                    android:hint="Nome do Filme ou Serie "
+                                    android:imeOptions="actionSearch"
+                                    android:maxLines="1"
+                                    android:singleLine="true">
 
 
-                            </EditText>
+                                </EditText>
 
-                            <View
-                                android:layout_width="@dimen/spacing_large"
-                                android:layout_height="0dp" />
+                                <View
+                                    android:layout_width="@dimen/spacing_large"
+                                    android:layout_height="0dp" />
 
-                        </LinearLayout>
+
+                            </LinearLayout>
+
+
+
+
 
                     </androidx.cardview.widget.CardView>
+                    <ImageView
+                        android:id="@+id/imageHome"
+                        android:layout_width="35dp"
+                        android:src="@drawable/ic_home"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:layout_height="35dp"/>
+                    </LinearLayout>
+
 
 
                 </androidx.appcompat.widget.Toolbar>
@@ -117,8 +142,8 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
-            android:layout_marginStart="60dp"
-            android:layout_marginEnd="60dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_height="20dp"
             app:tabBackground="@drawable/selector"
             app:tabGravity="center"
@@ -128,9 +153,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:overScrollMode="never"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp">
+            android:layout_margin="5dp"
+            android:overScrollMode="never">
         </androidx.viewpager.widget.ViewPager>
 
 

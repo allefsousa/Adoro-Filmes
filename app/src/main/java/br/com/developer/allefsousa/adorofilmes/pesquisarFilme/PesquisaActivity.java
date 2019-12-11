@@ -1,29 +1,23 @@
 package br.com.developer.allefsousa.adorofilmes.pesquisarFilme;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-
 import android.transition.Transition;
 import android.transition.TransitionInflater;
-import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.TableLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import com.amplitude.api.Amplitude;
 import com.google.android.gms.ads.AdRequest;
@@ -31,15 +25,8 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.tabs.TabLayout;
-import com.google.android.play.core.appupdate.AppUpdateInfo;
-import com.google.android.play.core.appupdate.AppUpdateManager;
-import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
 import com.google.android.play.core.install.InstallState;
 import com.google.android.play.core.install.InstallStateUpdatedListener;
-import com.google.android.play.core.install.model.AppUpdateType;
-import com.google.android.play.core.install.model.UpdateAvailability;
-import com.google.android.play.core.tasks.OnSuccessListener;
-import com.google.android.play.core.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.List;
@@ -47,23 +34,15 @@ import java.util.List;
 import br.com.developer.allefsousa.adorofilmes.R;
 import br.com.developer.allefsousa.adorofilmes.data.Result;
 import br.com.developer.allefsousa.adorofilmes.detalheFilme.DetalheFilmeActivity;
-import br.com.developer.allefsousa.adorofilmes.utils.SpacingItemDecoration;
 import br.com.developer.allefsousa.adorofilmes.utils.ViewPagerTransformation;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static br.com.developer.allefsousa.adorofilmes.AppApplication.mFirebaseAnalytics;
-import static br.com.developer.allefsousa.adorofilmes.utils.DpUtils.dpToPx;
 
 public class PesquisaActivity extends AppCompatActivity implements PesquisaFilmeContract.view, InstallStateUpdatedListener {
 
 
-//    @BindView(R.id.my_recycler_lancamentos)
-//    RecyclerView recyclerViewlancamentos;
-//    @BindView(R.id.my_recycler_lancamentospage2)
-//    RecyclerView recyclerViewPage2;
-//    @BindView(R.id.my_recycler_view)
-//    RecyclerView recyclerViewfilme;
     @BindView(R.id.et_search)
     EditText editFilme;
 
@@ -76,14 +55,15 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
     Image image;
     @BindView(R.id.tPesquisa)
     TextView texBusca;
-    private static final int MY_REQUEST_CODE = 17300;
+    @BindView(R.id.imageHome)
+    ImageView imageHome;
+    @BindView(R.id.tlancamentos)
+    TextView texLancamento;
 
 
     private PesquisaFilmeContract.presenter mPresenter;
-    private AdapterFilme adapterFilme;
-    private AdapterFilmeLancamentos adapterFilme2;
-    private RecyclerItemClickListener recyclerItemClickListener;
     private InterstitialAd mInterstitialAd;
+    private MoviesPagerAdapter adapter;
 
 
 
@@ -100,8 +80,9 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
         MobileAds.initialize(this, "ca-app-pub-2296995403494910~8764833228");
         Amplitude.getInstance().logEvent("Pesquisa Filme Activity");
         viewPagerMovie.setClipToPadding(false);
-//        viewPagerMovie.setPageTransformer(true,new ViewPagerTransformation());
+        viewPagerMovie.setPageTransformer(true,new ViewPagerTransformation());
 
+         adapter = new MoviesPagerAdapter();
 
         mFirebaseAnalytics.setCurrentScreen(this, "Pesquisa Filme Activity", null /* class override */);
 
@@ -124,19 +105,26 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
                 String tituloFilme;
                 tituloFilme = editFilme.getText().toString();
                 mPresenter.PesquisaFilme(tituloFilme);
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, tituloFilme);
+                bundle.putString("EVENTO", "PESQUISOU FILME");
+                mFirebaseAnalytics.logEvent("pesquisou_filme", bundle);
 
             }
 
             return false;
         });
 
+        imageHome.setOnClickListener(v -> {
+            adapter.listClear();
+            mPresenter.BuscaLancamentos();
+            imageHome.setVisibility(View.GONE);
+            texBusca.setVisibility(View.GONE);
+            texLancamento.setVisibility(View.VISIBLE);
+        });
+
 
         buscaTopFilmes();
-        recyclerItemClickListener = filme -> {
-            Intent inten = new Intent(PesquisaActivity.this, DetalheFilmeActivity.class);
-            inten.putExtra("filme", filme);
-            startActivity(inten);
-        };
         tableLayout.setupWithViewPager(viewPagerMovie, true);
 
 
@@ -161,8 +149,7 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
 
     @Override
     public void nomeFilmeemBranco() {
-        editFilme.setError("This field is required");
-        Toast.makeText(this, "Login successfully.", Toast.LENGTH_SHORT).show();
+        editFilme.setError("Informe o nome do filme.");
     }
 
 
@@ -175,21 +162,15 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
 
     @Override
     public void RecyclerViewSetValue(List<Result> resultFilme) {
-        MoviesPagerAdapter adapter = new MoviesPagerAdapter(this,resultFilme);
+        adapter.listClear();
+        adapter.addItem(resultFilme);
         viewPagerMovie.setAdapter(adapter);
-
-
-//        adapterFilme = new AdapterFilme(PesquisaActivity.this, resultFilme, recyclerItemClickListener);
-//        recyclerViewfilme.setLayoutManager(new GridLayoutManager(this, 2));
-//        recyclerViewfilme.setNestedScrollingEnabled(false);
-//        recyclerViewfilme.addItemDecoration(new SpacingItemDecoration(2, dpToPx(this, 4), true));
-//        recyclerViewfilme.setAdapter(adapterFilme);
-//        recyclerViewfilme.requestFocus();
-
-
     }
     public void visibilidadeTexto(){
         texBusca.setVisibility(View.VISIBLE);
+        texLancamento.setVisibility(View.GONE);
+        imageHome.setVisibility(View.VISIBLE);
+
     }
 
 
@@ -206,20 +187,13 @@ public class PesquisaActivity extends AppCompatActivity implements PesquisaFilme
 
     @Override
     public void updateUiTopFilmes(List<Result> results) {
-        MoviesPagerAdapter adapter = new MoviesPagerAdapter(this,results);
+        adapter.addItem(results);
         viewPagerMovie.setAdapter(adapter);
-//        adapterFilme2 = new AdapterFilmeLancamentos(PesquisaActivity.this, results, recyclerItemClickListener);
-//        recyclerViewlancamentos.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-//        recyclerViewlancamentos.setAdapter(adapterFilme2);
     }
     @Override
     public void updateUiTopFilmesPage2(List<Result> results) {
-        MoviesPagerAdapter adapter = new MoviesPagerAdapter(this,results);
+        adapter.addItem(results);
         viewPagerMovie.setAdapter(adapter);
-
-//        adapterFilme2 = new AdapterFilmeLancamentos(PesquisaActivity.this, results, recyclerItemClickListener);
-//        recyclerViewPage2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
-//        recyclerViewPage2.setAdapter(adapterFilme2);
     }
 
     @Override
