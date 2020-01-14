@@ -1,5 +1,7 @@
 package br.com.developer.allefsousa.adorofilmes.data.source.remote;
 
+import com.facebook.stetho.okhttp3.StethoInterceptor;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -23,6 +25,8 @@ public class RetrofitInstance {
         final OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         httpClient.addInterceptor(logging);
+        httpClient.addNetworkInterceptor(new StethoInterceptor());
+
 
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()

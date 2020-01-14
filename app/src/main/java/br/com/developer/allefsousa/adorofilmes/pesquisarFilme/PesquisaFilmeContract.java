@@ -15,13 +15,13 @@ public interface PesquisaFilmeContract {
 
         void nomeFilmeemBranco();
 
-        void PesquisaFilmeSemretorno();
+        void pesquisaFilmeSemretorno();
 
-        void RecyclerViewSetValue(List<Result> resultFilme);
+        void recyclerViewSetValue(List<Result> resultFilme);
 
-        void Limpar();
+        void limpar();
 
-        void ErroResquest(Throwable t);
+        void erroResquest(Throwable t);
 
         void updateUiTopFilmes(List<Result> results);
         void visibilidadeTexto();
@@ -44,10 +44,10 @@ public interface PesquisaFilmeContract {
             void onFailureTop(Throwable t);
         }
 
-        void getFilmeArrayList(OnFinishedListener onFinishedListener, String nomeFilme);
+        void getMovieArrayList(OnFinishedListener onFinishedListener, String nomeFilme);
 
-        void getFilmeLancamento(OnFinishedListener onFinishedListener);
-        void getFilmeLancamentoPage2(OnFinishedListener onFinishedListener);
+        void getMovieLancamentoOne(OnFinishedListener onFinishedListener);
+        void getMovieLancamentoTwo(OnFinishedListener onFinishedListener);
         
     }
 

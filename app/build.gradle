@@ -18,8 +18,8 @@ android {
         applicationId "br.com.developer.allefsousa.adorofilmes"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 12
-        versionName "2.0.1"
+        versionCode 13
+        versionName "2.0.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -89,6 +89,13 @@ dependencies {
     implementation 'com.mixpanel.android:mixpanel-android:5.+'
     implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "com.yuyakaido.android:card-stack-view:2.3.4"
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'com.facebook.stetho:stetho:1.5.1'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.1'
+
+
+
 
 }
 apply plugin: 'com.google.gms.google-services'

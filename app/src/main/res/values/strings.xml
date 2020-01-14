@@ -3,5 +3,7 @@
     <string name="item_element_text">This is element #</string>
     <string name="sLancamentos">Lançamentos</string>
     <string name="validation_message">Informe o nome do filme.</string>
+    <string name="open_drawer">Open drawer</string>
+    <string name="close_drawer">Close drawer</string>
 
 </resources>

@@ -1,7 +1,6 @@
 package br.com.developer.allefsousa.adorofilmes.pesquisarFilme;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import br.com.developer.allefsousa.adorofilmes.data.Request;
 
@@ -22,23 +21,23 @@ public class PesquisarFilmePresenter implements PesquisaFilmeContract.presenter,
         if (TextUtils.isEmpty(nomefilme)) {
             myView.nomeFilmeemBranco();
         } else {
-            filmeService.getFilmeArrayList(this, nomefilme);
+            filmeService.getMovieArrayList(this, nomefilme);
         }
     }
     public void BuscaLancamentos(){
-        filmeService.getFilmeLancamento(this);
-        filmeService.getFilmeLancamentoPage2(this);
+        filmeService.getMovieLancamentoOne(this);
+        filmeService.getMovieLancamentoTwo(this);
 
     }
 
     @Override
     public void onFinished(Request request) {
         if (request.getResults() == null) {
-            myView.PesquisaFilmeSemretorno();
+            myView.pesquisaFilmeSemretorno();
         } else {
             myView.visibilidadeTexto();
-            myView.RecyclerViewSetValue(request.getResults());
-            myView.Limpar();
+            myView.recyclerViewSetValue(request.getResults());
+            myView.limpar();
         }
     }
 
@@ -46,10 +45,7 @@ public class PesquisarFilmePresenter implements PesquisaFilmeContract.presenter,
 
     @Override
     public void onFailure(Throwable t) {
-
-        myView.ErroResquest(t);
-
-
+        myView.erroResquest(t);
     }
 
     @Override

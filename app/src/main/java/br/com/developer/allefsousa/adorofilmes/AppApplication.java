@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.multidex.MultiDexApplication;
 
 import com.amplitude.api.Amplitude;
+import com.facebook.stetho.Stetho;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mixpanel.android.mpmetrics.MixpanelAPI;
 
@@ -22,6 +23,8 @@ public class AppApplication extends MultiDexApplication {
         super.onCreate();
         Amplitude.getInstance().initialize(this, "7998be8d0de28476d91f784b6917997e").enableForegroundTracking(this);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        Stetho.initializeWithDefaults(this);
+
 
     }
 

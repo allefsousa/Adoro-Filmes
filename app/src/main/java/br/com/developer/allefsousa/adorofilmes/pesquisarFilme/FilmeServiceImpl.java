@@ -15,7 +15,7 @@ public class FilmeServiceImpl implements PesquisaFilmeContract.filmeService {
     private final String tipoFilme = "pt-br";
 
     @Override
-    public void getFilmeLancamento(OnFinishedListener onFinishedListener) {
+    public void getMovieLancamentoOne(OnFinishedListener onFinishedListener) {
         FilmeInterface filmeInterface = RetrofitInstance.getRetrofitInstance().create(FilmeInterface.class);
         Call<Request> call = filmeInterface.RequestPopular(apiKey,tipoFilme);
         call.enqueue(new Callback<Request>() {
@@ -30,7 +30,7 @@ public class FilmeServiceImpl implements PesquisaFilmeContract.filmeService {
             }
         });
     } @Override
-    public void getFilmeLancamentoPage2(OnFinishedListener onFinishedListener) {
+    public void getMovieLancamentoTwo(OnFinishedListener onFinishedListener) {
         FilmeInterface filmeInterface = RetrofitInstance.getRetrofitInstance().create(FilmeInterface.class);
         Call<Request> call = filmeInterface.RequestPopularPage2(apiKey,tipoFilme);
         call.enqueue(new Callback<Request>() {
@@ -47,7 +47,7 @@ public class FilmeServiceImpl implements PesquisaFilmeContract.filmeService {
     }
 
     @Override
-    public void getFilmeArrayList(OnFinishedListener onFinishedListener,String nomeFilme) {
+    public void getMovieArrayList(OnFinishedListener onFinishedListener, String nomeFilme) {
 
         FilmeInterface filmeInterface = RetrofitInstance.getRetrofitInstance().create(FilmeInterface.class);
 
